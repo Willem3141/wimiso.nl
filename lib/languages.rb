@@ -19,11 +19,8 @@ end
 # Returns all translations of an item
 def translations_of(item)
   @items.select do |i|
-    # this selects all items with the same idea
-    # furthermore it "hides" the Na'vi translation, except if
-    #   *  you are on the page about Na'vi, or
-    #   *  you are already on a Na'vi-language page
-    i[:id] == item[:id] && (i[:id] == "navi" || language_code_of(item) == language_code_of(i) || language_code_of(i) != "x-navi")
+    # this selects all items with the same id
+    i[:id] == item[:id]
   end.sort! do |a, b|
     language_name_of(a) <=> language_name_of(b)
   end
