@@ -1,0 +1,120 @@
+#!/usr/bin/env ruby
+
+# A few helpful tips about the Rules file:
+#
+# * The string given to #compile and #route are matching patterns for
+#   identifiers--not for paths. Therefore, you can’t match on extension.
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+require 'set'
+
+
+# Create tag pages for every tag
+preprocess do
+  tags = Set.new
+  articles.each do |item|
+    item[:tags].each do |t|
+      tags.add(t.downcase)
+    end
+  end
+  LANGUAGES.each do |language|
+    tags.each do |tag|
+      items << Nanoc::Item.new(
+        "",
+        { :tag => tag },
+        "/#{language}/blog/tag/#{tag}/")
+    end
+  end
+end
+
+
+passthrough '/static/*'
+
+
+compile '/subsites/*' do
+end
+
+compile '/*/blog/tag/*/' do
+  if item[:extension] == 'md'
+    filter :kramdown
+    layout 'page'
+  elsif item.binary?
+    # don’t filter binary items
+  else
+    filter :erb
+    layout 'page'
+  end
+end
+
+compile '/*/blog/*/' do
+  if item[:extension] == 'md'
+    filter :kramdown
+    layout 'post'
+  elsif item.binary?
+    # don’t filter binary items
+  else
+    filter :erb
+    layout 'post'
+  end
+end
+
+compile '*' do
+  if item[:extension] == 'md'
+    filter :kramdown
+    layout 'page'
+  elsif item.binary?
+    # don’t filter binary items
+  else
+    filter :erb
+    layout 'page'
+  end
+end
+
+
+route '/subsites/*/' do
+  item.identifier[9..-2]
+end
+
+route '/en/blog/tag/*/' do
+  item.identifier[3..-1] + 'index.html'
+end
+
+route '/*/blog/tag/*/' do
+  item.identifier + 'index.html'
+end
+
+route '/en/blog/*/' do
+  y, m, d, slug = /^\/en\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+)/.match(item.identifier).captures
+  
+  "/blog/#{y}/#{m}/#{slug}/index.html"
+end
+
+route '/*/blog/*/' do
+  language, y, m, d, slug = /^\/([a-z]{2}|x-[a-z]+)\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+)/.match(item.identifier).captures
+  
+  "/#{language}/blog/#{y}/#{m}/#{slug}/index.html"
+end
+
+route '/en/*' do
+  "#{item.identifier[3..-2]}/index.html"
+end
+
+route '*' do
+  if item.binary?
+    # Write item with identifier /foo/ to /foo.ext
+    item.identifier.chop + '.' + item[:extension]
+  else
+    # Write item with identifier /foo/ to /foo/index.html
+    item.identifier + 'index.html'
+  end
+end
+
+
+layout '*', :erb

@@ -1,0 +1,142 @@
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Alegreya Sans", sans-serif !important;
+    font-size: 12pt;
+    height: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    color: #b0836e;
+}
+
+h4, h5, h6 {
+    color: #b0836e;
+}
+
+.outer-div {
+    min-height: 100%;
+    position: relative;
+}
+
+.content {
+    padding-bottom: 4em;
+}
+
+/* De header */
+.header-top {
+    background: url("/static/img/header.jpg");
+    background-position: center right;
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    padding-top: 35px;
+    padding-right: 80px;
+}
+
+.header-title {
+    font-size: 400%;
+    color: white;
+    font-weight: bold;
+    text-align: right;
+}
+
+.header-subtitle {
+    font-size: 150%;
+    color: white;
+    text-align: right;
+    font-style: italic;
+}
+
+.navbar-default {
+    border: none;
+    background: linear-gradient(#B0836E, #7B5B4D) repeat scroll 0% 0% transparent;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 0px;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: white;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover {
+    color: white;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    background: linear-gradient(#7B5B4D, #B0836E) repeat scroll 0% 0% transparent;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+    background: linear-gradient(#7B5B4D, #B0836E) repeat scroll 0% 0% transparent;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* De header-kloon */
+.header-bottom.clone {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    display: none;
+}
+
+body.down .header-bottom.clone {
+    display: inherit;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.breadcrumb {
+    font-style: italic;
+}
+
+/* De footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4em;
+    
+    text-align: center;
+    font-size: 80%;
+    padding: 15px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* Sideboxes */
+.sidebox-right {
+    float: right;
+    clear: both;
+    width: 50%;
+    max-width: 300px;
+    border-left: 3px #b0836e solid;
+    padding-left: 15px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.sidebox-title {
+    font-size: 120%;
+    font-weight: bold;
+    text-align: center;
+}

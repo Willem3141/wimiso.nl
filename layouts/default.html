@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="<%= language_code_of(@item) %>">
+  <head>
+    <meta charset="utf-8">
+    <title>Wimiso - <%= @item[:title] %></title>
+    
+    <!-- jQuery -->
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    
+    <!-- Bootstrap -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- onze eigen zooi -->
+    <link href="/static/css/layout.css" rel="stylesheet">
+    <link href="/static/css/layout-background.css" rel="stylesheet">
+    <script src="/static/js/header.js"></script>
+    
+    <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
+  </head>
+  <body>
+    <div class="outer-div">
+      <header>
+        <div class="header-top">
+          <div class="header-title">
+            Wimiso <sup><span class="badge alert-success" style="transform: translate(0, -20px) rotate(-10deg); font-size: 35%; margin-left: -28px;">beta!</span></sup>
+          </div>
+          <div class="header-subtitle">
+            <%= _ :my_website %>
+          </div>
+        </div>
+        <div class="header-bottom">
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Navigatie aan/uit</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Wimiso</a>
+              </div>
+              
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <%= menu_link_to 'home' %>
+                  <%= submenu_to(:software, ['joxy']) %>
+                  <%= submenu_to(:projects, ['ti-programs', 'lojban', 'navi']) %>
+                  <%= menu_link_to 'contact' %>
+                  <%= menu_link_to 'blog' %>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<%= language_name_of @item %> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <% translations_of(@item).each do |t| %>
+                        <% if @item == t %>
+                          <li class="active">
+                            <a>
+                              <%= language_name_of(t) %>
+                            </a>
+                          </li>
+                        <% else %>
+                          <li>
+                            <a href="<%= t.path %>">
+                              <%= language_name_of t %>
+                            </a>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  </li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </div>
+      </header>
+      
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <div class="container">
+          &copy; 2014 &ndash; <%= Date.today.year %>&nbsp;&nbsp;Willem Sonke. <%= _ :footer_text %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

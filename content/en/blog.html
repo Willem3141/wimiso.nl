@@ -1,0 +1,18 @@
+---
+id: blog
+title: Blog
+---
+
+<h1>Blog</h1>
+<p>On this blog I write about things I created or things I did.</p>
+
+<h2>Articles</h2>
+<% sorted_articles_in_language("en").each do |post| %>
+  <div class='post'>
+    <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(post, {base_url: "tag/", separator: " / "}) %> / <%= post[:created_at] %></span>
+    <h3><%= link_to post[:title], post.path %></h3>
+    <article>
+      <%= get_post_start(post) %>
+    </article>
+  </div>
+<% end %>
