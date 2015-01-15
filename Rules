@@ -16,12 +16,13 @@
 require 'set'
 
 
-# Create tag pages for every tag
 preprocess do
+  
+  # create tag pages for every tag
   tags = Set.new
   articles.each do |item|
     item[:tags].each do |t|
-      tags.add(t.downcase)
+      tags.add(t)
     end
   end
   LANGUAGES.each do |language|
@@ -44,36 +45,60 @@ end
 compile '/*/blog/tag/*/' do
   if item[:extension] == 'md'
     filter :kramdown
-    layout 'page'
+    if item[:layout] == nil then
+      layout 'page'
+    else
+      layout item[:layout]
+    end
   elsif item.binary?
     # don’t filter binary items
   else
     filter :erb
-    layout 'page'
+    if item[:layout] == nil then
+      layout 'page'
+    else
+      layout item[:layout]
+    end
   end
 end
 
 compile '/*/blog/*/' do
   if item[:extension] == 'md'
     filter :kramdown
-    layout 'post'
+    if item[:layout] == nil then
+      layout 'post'
+    else
+      layout item[:layout]
+    end
   elsif item.binary?
     # don’t filter binary items
   else
     filter :erb
-    layout 'post'
+    if item[:layout] == nil then
+      layout 'post'
+    else
+      layout item[:layout]
+    end
   end
 end
 
 compile '*' do
   if item[:extension] == 'md'
     filter :kramdown
-    layout 'page'
+    if item[:layout] == nil then
+      layout 'page'
+    else
+      layout item[:layout]
+    end
   elsif item.binary?
     # don’t filter binary items
   else
     filter :erb
-    layout 'page'
+    if item[:layout] == nil then
+      layout 'page'
+    else
+      layout item[:layout]
+    end
   end
 end
 
