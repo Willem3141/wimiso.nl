@@ -61,7 +61,7 @@ def localized_url(id)
     return ""
   end
   
-  relative_path_to(translated_item)
+  translated_item.path
 end
 
 
