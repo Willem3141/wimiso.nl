@@ -68,6 +68,7 @@ LAYOUT_TRANSLATIONS = {
   
   :read_more => {'nl' => 'Verder lezen', 'en' => 'Read more', 'x-navi' => 'Nì\'ul'},
   :comments => {'nl' => 'Reacties', 'en' => 'Comments', 'x-navi' => 'Tìpängkxo'},
+  :tag => {'nl' => 'Tag', 'en' => 'Tag', 'x-navi' => 'Txele alu'},
 }
 
 

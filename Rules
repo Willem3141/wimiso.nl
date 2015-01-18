@@ -29,7 +29,9 @@ preprocess do
     tags.each do |tag|
       items << Nanoc::Item.new(
         "",
-        { :tag => tag },
+        { :id => "tag-#{tag}",
+          :title => "Tag &lsquo;#{tag}&rsquo;",
+          :tag => tag },
         "/#{language}/blog/tag/#{tag}/")
     end
   end
@@ -43,24 +45,8 @@ compile '/subsites/*' do
 end
 
 compile '/*/blog/tag/*/' do
-  if item[:extension] == 'md'
-    filter :erb
-    filter :kramdown
-    if item[:layout] == nil then
-      layout 'page'
-    else
-      layout item[:layout]
-    end
-  elsif item.binary?
-    # don’t filter binary items
-  else
-    filter :erb
-    if item[:layout] == nil then
-      layout 'page'
-    else
-      layout item[:layout]
-    end
-  end
+  filter :erb
+  layout 'tag'
 end
 
 compile '/*/blog/*/' do

@@ -4,6 +4,12 @@ def sorted_articles_in_language(lang)
     end
 end
 
+def sorted_articles_in_language_tag(lang, tag)
+    items_with_tag(tag).select do |i|
+        language_code_of(i) == lang && !i[:draft]
+    end
+end
+
 def get_post_start(post)
   content = post.compiled_content
   if content =~ /\s<!-- more -->\s/
