@@ -46,10 +46,11 @@ end
 # Returns a link URL staying within the current language
 def localized_url(id)
   # TODO do something if the page doesn't exist (e.g. revert to English)
+  
   translated_item = @items.find do |i|
-    i[:id] == id
-    language_code_of(i) == language_code_of(@item)
+    i[:id] == id and language_code_of(i) == language_code_of(@item)
   end
+  
   relative_path_to(translated_item)
 end
 
