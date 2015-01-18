@@ -11,7 +11,15 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3 {
+h1 {
+    text-transform: uppercase;
+    color: #b0836e;
+    padding-bottom: 10px;
+    border-bottom: 1px #eeeeee solid;
+    text-align: center;
+}
+
+h2, h3 {
     text-transform: uppercase;
     color: #b0836e;
 }

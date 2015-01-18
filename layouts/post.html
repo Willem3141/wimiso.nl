@@ -1,7 +1,7 @@
 <% render 'default' do %>
   <div class="col-xs-12">
-    <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(@item, {base_url: "/#{language_code_of(@item)}/blog/tag/", separator: " / "}) %> / <%= item[:created_at] %></span>
     <h1><%= item[:title] %></h1>
+    <p class="text-muted" style="text-align: center; margin-bottom: 20px;"><%= tags_for(@item, {base_url: "/#{language_code_of(@item)}/blog/tag/", separator: " / "}) %> / <%= item[:created_at] %></p>
     <article>
       <%= yield %>
     </article>
