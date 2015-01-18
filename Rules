@@ -44,6 +44,7 @@ end
 
 compile '/*/blog/tag/*/' do
   if item[:extension] == 'md'
+    filter :erb
     filter :kramdown
     if item[:layout] == nil then
       layout 'page'
@@ -64,6 +65,7 @@ end
 
 compile '/*/blog/*/' do
   if item[:extension] == 'md'
+    filter :erb
     filter :kramdown
     if item[:layout] == nil then
       layout 'post'
@@ -84,6 +86,7 @@ end
 
 compile '*' do
   if item[:extension] == 'md'
+    filter :erb
     filter :kramdown
     if item[:layout] == nil then
       layout 'page'
