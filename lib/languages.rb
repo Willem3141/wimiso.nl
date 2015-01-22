@@ -9,7 +9,7 @@ LANGUAGE_CODE_TO_NAME_MAPPING = {
 
 LANGUAGES = [ 'nl', 'en', 'x-navi' ]
 
-DEFAULT_LANGUAGE = 'nl'
+DEFAULT_LANGUAGE = 'en'
 
 def language_prefix_of(item)
   if item[:language] == DEFAULT_LANGUAGE then
