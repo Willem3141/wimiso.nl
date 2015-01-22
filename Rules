@@ -106,13 +106,20 @@ route '/*/blog/*/' do
 end
 
 route '*' do
+  # map binary items to their exact names, and non-binary items to .../index.html
   if item.binary?
-    # Write item with identifier /foo/ to /foo.ext
-    language_prefix_of(@item) + @item.identifier.chop + '.' + item[:extension]
-  else
-    # Write item with identifier /foo/ to /foo/index.html
     url_without_language = item.identifier.split('/')[2..-1].join('/')
-    language_prefix_of(@item) + '/' + url_without_language + (if url_without_language == '' then '' else '/' end) + 'index.html'
+    language_prefix_of(@item) +
+        '/' +
+        url_without_language +
+        @item[:extension]
+  else
+    url_without_language = item.identifier.split('/')[2..-1].join('/')
+    language_prefix_of(@item) +
+        '/' +
+        url_without_language +
+        (if url_without_language == '' then '' else '/' end) +
+        'index.html'
   end
 end
 
