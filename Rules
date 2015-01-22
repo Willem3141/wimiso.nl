@@ -40,7 +40,7 @@ preprocess do
   @items.each do |item|
     match = /^\/([a-z]{2}|x-[a-z]+)\/.*/.match(item.identifier)
     if not match == nil then
-      item[:language] = match.captures
+      item[:language] = match.captures[0]
     end
   end
 end
@@ -58,18 +58,13 @@ compile '/*/blog/tag/*/' do
 end
 
 compile '/*/blog/*/' do
-  if item[:extension] == 'md'
-    filter :erb
-    filter :kramdown
-    if item[:layout] == nil then
-      layout 'post'
-    else
-      layout item[:layout]
-    end
-  elsif item.binary?
+  if item.binary?
     # don’t filter binary items
   else
     filter :erb
+    if item[:extension] == 'md'
+      filter :kramdown
+    end
     if item[:layout] == nil then
       layout 'post'
     else
@@ -79,18 +74,13 @@ compile '/*/blog/*/' do
 end
 
 compile '*' do
-  if item[:extension] == 'md'
-    filter :erb
-    filter :kramdown
-    if item[:layout] == nil then
-      layout 'page'
-    else
-      layout item[:layout]
-    end
-  elsif item.binary?
+  if item.binary?
     # don’t filter binary items
   else
     filter :erb
+    if item[:extension] == 'md'
+      filter :kramdown
+    end
     if item[:layout] == nil then
       layout 'page'
     else
@@ -112,16 +102,10 @@ route '/*/blog/tag/*/' do
   item.identifier + 'index.html'
 end
 
-route '/en/blog/*/' do
-  y, m, d, slug = /^\/en\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+)/.match(item.identifier).captures
-  
-  "/blog/#{y}/#{m}/#{slug}/index.html"
-end
-
 route '/*/blog/*/' do
   language, y, m, d, slug = /^\/([a-z]{2}|x-[a-z]+)\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+)/.match(item.identifier).captures
   
-  "/#{language}/blog/#{y}/#{m}/#{slug}/index.html"
+  "#{language_prefix_of item}/blog/#{y}/#{m}/#{slug}/index.html"
 end
 
 route '/en/*' do

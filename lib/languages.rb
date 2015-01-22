@@ -9,6 +9,15 @@ LANGUAGE_CODE_TO_NAME_MAPPING = {
 
 LANGUAGES = [ 'nl', 'en', 'x-navi' ]
 
+DEFAULT_LANGUAGE = 'en'
+
+def language_prefix_of(item)
+  if item[:language] == DEFAULT_LANGUAGE then
+    ''
+  else
+    "/#{item[:language]}"
+  end
+end
 
 # Returns the langage name corresponding to a code
 def language_name_for_code(code)
