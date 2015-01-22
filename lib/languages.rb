@@ -9,7 +9,7 @@ LANGUAGE_CODE_TO_NAME_MAPPING = {
 
 LANGUAGES = [ 'nl', 'en', 'x-navi' ]
 
-DEFAULT_LANGUAGE = 'en'
+DEFAULT_LANGUAGE = 'nl'
 
 def language_prefix_of(item)
   if item[:language] == DEFAULT_LANGUAGE then
@@ -36,19 +36,9 @@ def translations_of(item)
 end
 
 
-# Returns the language code of an item
-def language_code_of(item)
-  # "/en/foo/" becomes "en"
-  # "/x-navi/sngel/" becomes "x-navi"
-  code = (item.identifier.match(/^\/([a-z]{2}|x-[a-z]+)\//) || [])[1]
-  
-  if code then code else "en" end
-end
-
-
 # Returns the language name of an item
 def language_name_of(item)
-  language_name_for_code language_code_of item
+  language_name_for_code item[:language]
 end
 
 
@@ -56,12 +46,12 @@ end
 def localized_url(id)
   
   translated_item = @items.find do |i|
-    i[:id] == id and language_code_of(i) == language_code_of(@item)
+    i[:id] == id and i[:language] == @item[:language]
   end
   
   if translated_item == nil then
     translated_item = @items.find do |i|
-      i[:id] == id and language_code_of(i) == "en"
+      i[:id] == id and i[:language] == "en"
     end
   end
   
@@ -93,5 +83,5 @@ LAYOUT_TRANSLATIONS = {
 
 # Returns a translation of an element suitable for a given item
 def _(element)
-  LAYOUT_TRANSLATIONS[element][language_code_of @item]
+  LAYOUT_TRANSLATIONS[element][@item[:language]]
 end

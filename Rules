@@ -30,7 +30,8 @@ preprocess do
       items << Nanoc::Item.new(
         "",
         { :id => "tag-#{tag}",
-          :title => "Tag &lsquo;#{tag}&rsquo;",
+          :language => language,
+          :title => "#{LAYOUT_TRANSLATIONS[:tag][language]} &lsquo;#{tag}&rsquo;",
           :tag => tag },
         "/#{language}/blog/tag/#{tag}/")
     end
@@ -91,34 +92,27 @@ end
 
 
 route '/subsites/*/' do
-  item.identifier[9..-2]
-end
-
-route '/en/blog/tag/*/' do
-  item.identifier[3..-1] + 'index.html'
+  @item.identifier[9..-2]
 end
 
 route '/*/blog/tag/*/' do
-  item.identifier + 'index.html'
+  language_prefix_of(@item) + @item.identifier + 'index.html'
 end
 
 route '/*/blog/*/' do
   language, y, m, d, slug = /^\/([a-z]{2}|x-[a-z]+)\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+)/.match(item.identifier).captures
   
-  "#{language_prefix_of item}/blog/#{y}/#{m}/#{slug}/index.html"
-end
-
-route '/en/*' do
-  "#{item.identifier[3..-2]}/index.html"
+  "#{language_prefix_of @item}/blog/#{y}/#{m}/#{slug}/index.html"
 end
 
 route '*' do
   if item.binary?
     # Write item with identifier /foo/ to /foo.ext
-    item.identifier.chop + '.' + item[:extension]
+    language_prefix_of(@item) + @item.identifier.chop + '.' + item[:extension]
   else
     # Write item with identifier /foo/ to /foo/index.html
-    item.identifier + 'index.html'
+    url_without_language = item.identifier.split('/')[2..-1].join('/')
+    language_prefix_of(@item) + '/' + url_without_language + (if url_without_language == '' then '' else '/' end) + 'index.html'
   end
 end
 

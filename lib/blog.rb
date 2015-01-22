@@ -1,13 +1,13 @@
 def sorted_articles_in_language(lang)
-    sorted_articles.select do |i|
-        language_code_of(i) == lang && !i[:draft]
-    end
+  sorted_articles.select do |i|
+    i[:language] == lang && !i[:draft]
+  end
 end
 
 def sorted_articles_in_language_tag(lang, tag)
-    items_with_tag(tag).select do |i|
-        language_code_of(i) == lang && !i[:draft]
-    end
+  items_with_tag(tag).select do |i|
+    i[:language] == lang && !i[:draft]
+  end
 end
 
 def get_post_start(post)

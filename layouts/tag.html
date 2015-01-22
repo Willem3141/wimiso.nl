@@ -1,7 +1,7 @@
 <% render 'default' do %>
   <h1><%= _ :tag %> &lsquo;<%= @item[:tag] %>&rsquo;</h1>
   
-  <% sorted_articles_in_language_tag(language_code_of(@item), @item[:tag]).each do |post| %>
+  <% sorted_articles_in_language_tag(@item[:language], @item[:tag]).each do |post| %>
     <div class='post'>
       <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(post, {base_url: "tag/", separator: " / "}) %> / <%= post[:created_at] %></span>
       <h3><%= link_to post[:title], post.path %></h3>

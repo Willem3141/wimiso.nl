@@ -2,7 +2,7 @@
 # or else in another language
 def menu_link_to(id)
   
-  link = menu_link_in_language(id, language_code_of(@item))
+  link = menu_link_in_language(id, @item[:language])
   link ||= menu_link_in_language(id, "en", fallback=true)
   link ||= menu_link_in_language(id, "nl", fallback=true)
   link
@@ -47,7 +47,7 @@ end
 
 def find_item(id, lang)
   @items.find do |i|
-    i[:id] == id && language_code_of(i) == lang
+    i[:id] == id && i[:language] == lang
   end
 end
 
