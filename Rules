@@ -35,6 +35,14 @@ preprocess do
         "/#{language}/blog/tag/#{tag}/")
     end
   end
+  
+  # set language tags on items
+  @items.each do |item|
+    match = /^\/([a-z]{2}|x-[a-z]+)\/.*/.match(item.identifier)
+    if not match == nil then
+      item[:language] = match.captures
+    end
+  end
 end
 
 
