@@ -3,16 +3,10 @@ id: blog
 title: Pìlok
 ---
 
-<h1>Pìlok</h1>
-<p>Mì fìlok oeyä oe pamrel si teri ayu a ngamop oeti, fu teri ayhem a soli oe.</p>
-
-<h2>Ayfamrel</h2>
-<% sorted_articles_in_language("x-navi").each do |post| %>
-  <div class='post'>
-    <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(post, {base_url: "tag/", separator: " / "}) %> / <%= post[:created_at] %></span>
-    <h3><%= link_to post[:title], post.path %></h3>
-    <article>
-      <%= get_post_start(post) %>
-    </article>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Pìlok</h1>
+    <p>Mì fìlok oeyä oe pamrel si teri ayu a ngamop oeti, fu teri ayhem a soli oe.</p>
   </div>
-<% end %>
+</div>
+<%= render "postlist" %>

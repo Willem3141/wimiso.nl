@@ -1,0 +1,13 @@
+<div class="row">
+  <% sorted_articles_in_language(@item[:language]).each_with_index do |post, i| %>
+    <div class="col-xs-12 col-md-6">
+      <div class="blogpost-box<% if i % 2 == 1 then %> lower<% end %>">
+        <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(post, {base_url: "tag/", separator: " / "}) %> / <%= post[:created_at] %></span>
+        <h3><%= link_to post[:title], post.path %></h3>
+        <article>
+          <%= get_post_start(post) %>
+        </article>
+      </div>
+    </div>
+  <% end %>
+</div>
