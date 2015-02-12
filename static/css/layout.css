@@ -9,7 +9,7 @@ body {
     font-family: "Alegreya", serif !important;
     font-size: 12pt;
     height: 100%;
-    background: #fbfaeb;
+    background: white;
     text-rendering: optimizeLegibility;
     text-align: justify;
 }
@@ -39,7 +39,7 @@ h4, h5, h6 {
 .outer-div {
     min-height: 100%;
     position: relative;
-    background: #fbfaeb;
+    background: white;
 }
 
 .content {
