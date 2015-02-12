@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Alegreya:400,700,400italic,700italic|Alegreya+Sans:400,400italic,700,700italic&subset=latin,latin-ext);
 
 html {
     height: 100%;
@@ -6,7 +6,7 @@ html {
 }
 
 body {
-    font-family: "Alegreya Sans", sans-serif !important;
+    font-family: "Alegreya", serif !important;
     font-size: 12pt;
     height: 100%;
     background: #fbfaeb;
@@ -15,6 +15,7 @@ body {
 }
 
 h1 {
+    font-family: "Alegreya Sans", sans-serif !important;
     text-transform: uppercase;
     color: #b0836e;
     padding-bottom: 10px;
@@ -23,12 +24,14 @@ h1 {
 }
 
 h2, h3 {
+    font-family: "Alegreya Sans", sans-serif !important;
     text-transform: uppercase;
     color: #b0836e;
     text-align: left;
 }
 
 h4, h5, h6 {
+    font-family: "Alegreya Sans", sans-serif !important;
     color: #b0836e;
     text-align: left;
 }
@@ -69,6 +72,7 @@ h4, h5, h6 {
 }
 
 .navbar-default {
+    font-family: "Alegreya Sans", sans-serif !important;
     border: none;
     background: #f6f4cf;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
