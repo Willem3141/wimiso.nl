@@ -86,7 +86,6 @@ h4, h5, h6 {
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
     background: #eee9a4;
-    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .dropdown-menu > .active > a,
