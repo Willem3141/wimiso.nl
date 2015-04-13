@@ -15,6 +15,18 @@
     <link href="/static/css/layout.css" rel="stylesheet">
     <script src="/static/js/header.js"></script>
     
+    <% if @item[:needs_math] %>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config(
+                {
+                    tex2jax: {inlineMath: [['$','$']]}
+                }
+            );
+        </script>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+    <% end %>
+    
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
   </head>
   <body>
@@ -45,9 +57,7 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <%= menu_link_to 'home' %>
-                  <%= submenu_to(:study, ['graduates-viewer']) %>
-                  <%= submenu_to(:software, ['joxy']) %>
-                  <%= submenu_to(:projects, ['ti-programs', 'fonts', 'conlangs']) %>
+                  <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs']) %>
                   <%= menu_link_to 'contact' %>
                   <%= menu_link_to 'blog' %>
                 </ul>
