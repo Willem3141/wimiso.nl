@@ -1,13 +1,24 @@
-<div class="row">
-  <% sorted_articles_in_language(@item[:language]).each_with_index do |post, i| %>
+<% sorted_articles_in_language(@item[:language]).each_slice(2) do |posts| %>
+  <div class="row">
     <div class="col-xs-12 col-md-6">
-      <div class="blogpost-box<% if i % 2 == 1 then %> lower<% end %>">
-        <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(post, {base_url: "tag/", separator: " / "}) %> / <%= post[:created_at] %></span>
-        <h3><%= link_to post[:title], post.path %></h3>
+      <div class="blogpost-box">
+        <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(posts[0], {base_url: "tag/", separator: " / "}) %> / <%= posts[0][:created_at] %></span>
+        <h3><%= link_to posts[0][:title], posts[0].path %></h3>
         <article>
-          <%= get_post_start(post) %>
+          <%= get_post_start(posts[0]) %>
         </article>
       </div>
     </div>
-  <% end %>
-</div>
+    <% if posts[1] %>
+      <div class="col-xs-12 col-md-6">
+        <div class="blogpost-box lower">
+          <span class="text-muted pull-right" style="margin-top: 20px;"><%= tags_for(posts[1], {base_url: "tag/", separator: " / "}) %> / <%= posts[1][:created_at] %></span>
+          <h3><%= link_to posts[1][:title], posts[1].path %></h3>
+          <article>
+            <%= get_post_start(posts[1]) %>
+          </article>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
