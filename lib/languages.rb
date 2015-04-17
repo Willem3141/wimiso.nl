@@ -3,7 +3,10 @@ include Nanoc::Helpers::LinkTo
 LANGUAGE_CODE_TO_NAME_MAPPING = {
   'nl' => 'Nederlands',
   'en' => 'English',
-  'x-navi' => 'Lì\'fya leNa\'vi',
+  'x-navi' => 'nìNa\'vi',
+  'ja' => '日本語',
+  'de' => 'Deutsch',
+  'fr' => 'Français'
 }
 
 
@@ -65,19 +68,43 @@ end
 
 
 LAYOUT_TRANSLATIONS = {
-  :my_website => {'nl' => 'Mijn website :)', 'en' => 'My website :)', 'x-navi' => 'Tsenge oeyä :)'},
-  :footer_text => {'nl' => 'Gemaakt met <a href="http://getbootstrap.com">Bootstrap</a> en <a href="http://nanoc.ws">nanoc</a>.',
+  :my_website => {
+                  'nl' => 'Mijn website :)',
+                  'en' => 'My website :)',
+                  'x-navi' => 'Tsenge oeyä :)'
+                 },
+  :footer_text => {
+                   'nl' => 'Gemaakt met <a href="http://getbootstrap.com">Bootstrap</a> en <a href="http://nanoc.ws">nanoc</a>.',
                    'en' => 'Created using <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://nanoc.ws">nanoc</a>.',
-                   'x-navi' => 'Ngolop fa aysä\'o alu <a href="http://getbootstrap.com">Bootstrap</a> sì <a href="http://nanoc.ws">nanoc</a>.'},
+                   'x-navi' => 'Ngolop fa aysä\'o alu <a href="http://getbootstrap.com">Bootstrap</a> sì <a href="http://nanoc.ws">nanoc</a>.'
+                  },
   
-  :study => {'nl' => 'Studie', 'en' => 'Study', 'x-navi' => 'Tìftia'}, # not used at the moment
-  :software => {'nl' => 'Software', 'en' => 'Software', 'x-navi' => 'Ayvefya'},
-  :hobbies => {'nl' => 'Hobby\'s', 'en' => 'Hobbies', 'x-navi' => 'Tìk\'ìn'}, # not used at the moment
-  :projects => {'nl' => 'Projecten', 'en' => 'Projects', 'x-navi' => 'Sìkangkemvi'},
+  :research => {
+                'nl' => 'Onderzoek',
+                'en' => 'Research',
+                'x-navi' => 'Txintìn'
+               },
+  :projects => {
+                'nl' => 'Projecten',
+                'en' => 'Projects',
+                'x-navi' => 'Sìkangkemvi'
+               },
   
-  :read_more => {'nl' => 'Verder lezen', 'en' => 'Read more', 'x-navi' => 'Nì\'ul'},
-  :comments => {'nl' => 'Reacties', 'en' => 'Comments', 'x-navi' => 'Tìpängkxo'},
-  :tag => {'nl' => 'Tag', 'en' => 'Tag', 'x-navi' => 'Txele alu'},
+  :read_more => {
+                 'nl' => 'Verder lezen',
+                 'en' => 'Read more',
+                 'x-navi' => 'Nì\'ul'
+                },
+  :comments => {
+                'nl' => 'Reacties',
+                'en' => 'Comments',
+                'x-navi' => 'Tìpängkxo'
+               },
+  :tag => {
+           'nl' => 'Tag',
+           'en' => 'Tag',
+           'x-navi' => 'Txele alu'
+          }
 }
 
 
