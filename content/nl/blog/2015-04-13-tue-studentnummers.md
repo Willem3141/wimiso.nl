@@ -8,7 +8,7 @@ tags:
  - random
 ---
 
-In het boek *Discrete Wiskunde* (door J. H. van Lint en J. W. Nienhuys), heb ik iets interessants ontdekt over hoe studentnummers op de <a href="http://tue.nl">TU/e</a> (mijn universiteit) werken. <!-- more --> Volgens dit boek is een studentnummer van de vorm $a_0 \, a_1 \, a_2 \, a_3 \, a_4 \, a_5$ geldig dan en slechts dan als
+In het boek *Discrete Wiskunde* door J. H. van Lint en J. W. Nienhuys, heb ik iets interessants ontdekt over hoe studentnummers op de <a href="http://tue.nl">TU/e</a> (mijn universiteit) werken. <!-- more --> Volgens dit boek is een studentnummer van de vorm $a_0 \, a_1 \, a_2 \, a_3 \, a_4 \, a_5$ geldig dan en slechts dan als
 
 $$\sum_{i = 0}^5 (2^{6 + i + a_i} \mod 11)$$
 
