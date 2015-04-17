@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Actor);
+@import url(http://fonts.googleapis.com/css?family=Actor|Oxygen+Mono);
 
 html {
     height: 100%;
@@ -12,6 +12,10 @@ body {
     background: white;
     text-rendering: optimizeLegibility;
     text-align: justify;
+}
+
+pre, code {
+    font-family: "Oxygen Mono";
 }
 
 h1 {
