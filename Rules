@@ -66,6 +66,9 @@ compile '/*/blog/*/' do
     if item[:extension] == 'md'
       filter :kramdown
     end
+    if item[:needs_highlighting]
+      filter :colorize_syntax, :default_colorizer => :pygmentsrb
+    end
     if item[:layout] == nil then
       layout 'post'
     else
@@ -81,6 +84,9 @@ compile '*' do
     filter :erb
     if item[:extension] == 'md'
       filter :kramdown
+    end
+    if item[:needs_highlighting]
+      filter :colorize_syntax, :default_colorizer => :pygmentsrb
     end
     if item[:layout] == nil then
       layout 'page'

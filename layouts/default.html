@@ -27,6 +27,10 @@
         </script>
     <% end %>
     
+    <% if @item[:needs_highlighting] %>
+        <link href="/static/css/pygments.css" rel="stylesheet">
+    <% end %>
+    
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
   </head>
   <body>
