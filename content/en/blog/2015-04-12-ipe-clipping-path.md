@@ -14,13 +14,21 @@ In this post I want to explain a little-known (at least to me) feature of the Ip
 How does it work?
 -----------------
 
-The option is hidden very well in the interface, although the manual mentions it briefly. (But who reads the manual anyway 😃) So here is how it works.
+Sometimes you want to restrict the drawing of an object to a rectangle. That means that while the object itself isn't changed, it is only drawn inside the rectangle, and hidden outside of it.
 
-1. First, select the object you want to clip. This needs to be a group object, since you can only apply clipping paths to groups, not to single objects. (Of course, if you want to add a clipping path to one object, a simple workaround is to just make a group consisting your single element.)
+We can extend this concept to include arbitrary paths instead of only rectangles. We call such a path a *clipping path*, since it *clips* the object to its shape. So, a clipping path is a closed curve that defines an area outside of which some object should not be drawn.
+
+<%= render "image", :url => "/static/img/2015-04-12-ipe-clipping-path.svg", :description => "How clipping works: the shapes on the right are clipped by the dotted circular clipping path" %>
+
+Now the good news: Ipe supports clipping paths. The option is hidden very well in the interface, although the manual mentions it briefly. (But who reads the manual anyway 😃) Here is how it works:
+
+1. First, select the object you want to clip. This needs to be a group object, since you can only apply clipping paths to groups, not to single objects. To group elements, use *Edit > Group* or press `Ctrl+G`. Of course, if you want to add a clipping path to one object, a simple workaround is to just make a group consisting your single element.
 2. After that, select the clipping path while holding `Shift`. The clipping path needs to be a path object (yeah, logical, right?). Now the group and the path should both be selected; the group with a pinkish colour, and the path with a red colour.
 3. Right-click either the group or the path and select *Add clipping path*.
 
-Now the part of the group outside of the path becomes hidden.
+Here is a video demo:
+
+<%= render "video", :url => "/static/video/2015-04-12-ipe-clipping-paths-demo", :description => "An example of clipping an object" %>
 
 Why do you need this?
 ---------------------
