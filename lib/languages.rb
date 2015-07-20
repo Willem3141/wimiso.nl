@@ -14,6 +14,7 @@ LANGUAGES = [ 'nl', 'en', 'x-navi' ]
 
 DEFAULT_LANGUAGE = 'en'
 
+
 def language_prefix_of(item)
   if item[:language] == DEFAULT_LANGUAGE then
     ''
@@ -22,11 +23,29 @@ def language_prefix_of(item)
   end
 end
 
+
 # Returns the langage name corresponding to a code
 def language_name_for_code(code)
   LANGUAGE_CODE_TO_NAME_MAPPING[code]
 end
 
+
+# Strips away the prefix for the default language. This can be applied to every
+# routing rule.
+def strip_default_language(url)
+  url.lchomp('/' + DEFAULT_LANGUAGE)
+end
+
+# Utility function. TODO: remove this when/if this lands in Ruby proper
+class String
+  def lchomp(match)
+    if index(match) == 0
+      self[match.size..-1]
+    else
+      self.dup
+    end
+  end
+end
 
 # Returns all translations of an item
 def translations_of(item)
@@ -52,13 +71,13 @@ def localized_url(id)
     i[:id] == id and i[:language] == @item[:language]
   end
   
-  if translated_item == nil then
+  if translated_item.nil? then
     translated_item = @items.find do |i|
       i[:id] == id and i[:language] == "en"
     end
   end
   
-  if translated_item == nil then
+  if translated_item.nil? then
     puts "Warning: dead link to '#{id}' from page '#{@item[:id]}'"
     return ""
   end
@@ -74,9 +93,9 @@ LAYOUT_TRANSLATIONS = {
                   'x-navi' => 'Tsenge oeyä :)'
                  },
   :footer_text => {
-                   'nl' => 'Gemaakt met <a href="http://getbootstrap.com">Bootstrap</a> en <a href="http://nanoc.ws">nanoc</a>.',
-                   'en' => 'Created using <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://nanoc.ws">nanoc</a>.',
-                   'x-navi' => 'Ngolop fa aysä\'o alu <a href="http://getbootstrap.com">Bootstrap</a> sì <a href="http://nanoc.ws">nanoc</a>.'
+                   'nl' => 'Gemaakt met <a href="http://getbootstrap.com">Bootstrap</a> en <a href="http://nanoc.ws">Nanoc 4</a>.',
+                   'en' => 'Created using <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://nanoc.ws">Nanoc 4</a>.',
+                   'x-navi' => 'Ngolop fa aysä\'o alu <a href="http://getbootstrap.com">Bootstrap</a> sì <a href="http://nanoc.ws">Nanoc 4</a>.'
                   },
   
   :research => {

@@ -11,6 +11,6 @@ This is an interesting trick that I noticed if you are running [KWin](http://en.
 
 <!-- more -->
 
-<%= render "image", :url => "/static/img/2015-01-21-killing-in-kwin.png", :description => "Notice the skull cursor" %>
+<%= render "/image.html", :url => "/static/img/2015-01-21-killing-in-kwin.png", :description => "Notice the skull cursor" %>
 
 If this doesn't work, the keyboard shortcut may not be set. In that case, go to the *Global Keyboard Shortcuts*, pick component *KWin* and set *Force Quit Window* to **Ctrl + Alt + Esc** (or any other shortcut).

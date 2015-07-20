@@ -1,18 +1,5 @@
 #!/usr/bin/env ruby
 
-# A few helpful tips about the Rules file:
-#
-# * The string given to #compile and #route are matching patterns for
-#   identifiers--not for paths. Therefore, you can’t match on extension.
-#
-# * The order of rules is important: for each item, only the first matching
-#   rule is applied.
-#
-# * Item identifiers start and end with a slash (e.g. “/about/” for the file
-#   “content/about.html”). To select all children, grandchildren, … of an
-#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
-#   because “*” matches zero or more characters.
-
 require 'set'
 
 
@@ -27,13 +14,13 @@ preprocess do
   end
   LANGUAGES.each do |language|
     tags.each do |tag|
-      items << Nanoc::Item.new(
+      @items.create(
         "",
         { :id => "tag-#{tag}",
           :language => language,
           :title => "#{LAYOUT_TRANSLATIONS[:tag][language]} &lsquo;#{tag}&rsquo;",
           :tag => tag },
-        "/#{language}/blog/tag/#{tag}/")
+        "/#{language}/blog/tag/#{tag}")
     end
   end
   
@@ -47,21 +34,13 @@ preprocess do
 end
 
 
-passthrough '/static/*'
-
-
-compile '/subsites/*' do
-end
-
-compile '/*/blog/tag/*/' do
+compile '/*/blog/tag/*' do
   filter :erb
-  layout 'tag'
+  layout '/tag.html'
 end
 
-compile '/*/blog/*/' do
-  if item.binary?
-    # don’t filter binary items
-  else
+compile '/*/blog/**/*' do
+  if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
     filter :erb
     if item[:extension] == 'md'
       filter :kramdown
@@ -70,17 +49,15 @@ compile '/*/blog/*/' do
       filter :colorize_syntax, :default_colorizer => :pygmentsrb
     end
     if item[:layout] == nil then
-      layout 'post'
+      layout '/post.html'
     else
-      layout item[:layout]
+      layout '/' + item[:layout] + '.html'
     end
   end
 end
 
-compile '*' do
-  if item.binary?
-    # don’t filter binary items
-  else
+compile '/**/*' do
+  if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
     filter :erb
     if item[:extension] == 'md'
       filter :kramdown
@@ -89,50 +66,37 @@ compile '*' do
       filter :colorize_syntax, :default_colorizer => :pygmentsrb
     end
     if item[:layout] == nil then
-      layout 'page'
+      layout '/page.html'
     else
-      layout item[:layout]
+      layout '/' + item[:layout] + '.html'
     end
   end
 end
 
 
-route '/subsites/*/' do
-  @item.identifier[9..-2]
+route '/*/blog/tag/*' do
+  strip_default_language (item.identifier.without_ext + '/index.html')
 end
 
-route '/*/blog/tag/*/' do
-  url_without_language = @item.identifier.split('/')[2..-1].join('/')
-  language_prefix_of(@item) +
-      '/' +
-      url_without_language +
-      (if url_without_language == '' then '' else '/' end) +
-      'index.html'
-end
-
-route '/*/blog/*/' do
-  language, y, m, d, slug = /^\/([a-z]{2}|x-[a-z]+)\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+)/.match(item.identifier).captures
+route '/*/blog/**/*' do
+  language, y, m, d, slug = /^\/([a-z]{2}|x-[a-z]+)\/blog\/([0-9]+)\-([0-9]+)\-([0-9]+)\-([^\/]+).(html|md)/.match(item.identifier).captures
   
-  "#{language_prefix_of @item}/blog/#{y}/#{m}/#{slug}/index.html"
+  strip_default_language "/#{language}/blog/#{y}/#{m}/#{slug}/index.html"
 end
 
-route '*' do
-  # map binary items to their exact names, and non-binary items to .../index.html
-  if item.binary?
-    url_without_language = @item.identifier.split('/')[2..-1].join('/')
-    language_prefix_of(@item) +
-        '/' +
-        url_without_language +
-        @item[:extension]
+route '/**/index.*' do
+  # /index.md gets written to /index.html
+  strip_default_language item.identifier.with_ext('html')
+end
+
+route '/**/*' do
+  # map non-pages to their exact names, and pages to .../index.html
+  if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
+    strip_default_language (item.identifier.without_ext + '/index.html')
   else
-    url_without_language = @item.identifier.split('/')[2..-1].join('/')
-    language_prefix_of(@item) +
-        '/' +
-        url_without_language +
-        (if url_without_language == '' then '' else '/' end) +
-        'index.html'
+    strip_default_language item.identifier.to_s
   end
 end
 
 
-layout '*', :erb
+layout '/**/*', :erb

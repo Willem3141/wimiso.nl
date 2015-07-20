@@ -18,7 +18,7 @@ Sometimes you want to restrict the drawing of an object to a rectangle. That mea
 
 We can extend this concept to include arbitrary paths instead of only rectangles. We call such a path a *clipping path*, since it *clips* the object to its shape. So, a clipping path is a closed curve that defines an area outside of which some object should not be drawn.
 
-<%= render "image", :url => "/static/img/2015-04-12-ipe-clipping-path.svg", :description => "How clipping works: the shapes on the right are clipped by the dotted circular clipping path" %>
+<%= render "/image.html", :url => "/static/img/2015-04-12-ipe-clipping-path.svg", :description => "How clipping works: the shapes on the right are clipped by the dotted circular clipping path" %>
 
 Now the good news: Ipe supports clipping paths. The option is hidden very well in the interface, although the manual mentions it briefly. (But who reads the manual anyway 😃) Here is how it works:
 
@@ -28,7 +28,7 @@ Now the good news: Ipe supports clipping paths. The option is hidden very well i
 
 Here is a video demo:
 
-<%= render "video", :url => "/static/video/2015-04-12-ipe-clipping-paths-demo", :description => "An example of clipping an object" %>
+<%= render "/video.html", :url => "/static/video/2015-04-12-ipe-clipping-paths-demo", :description => "An example of clipping an object" %>
 
 Why do you need this?
 ---------------------
