@@ -35,17 +35,11 @@ prune:
 # “layout/” directories in the site directory.
 data_sources:
   -
-    type: filesystem_unified
-    items_root: /
-    layouts_root: /
-    allow_periods_in_identifiers: false
-    identifier_type: full
-  #-
-    #type: static
-    #items_root: /static/
-  #-
-    #type: static
-    #items_root: /subsites/
-    #prefix: subsites
+    type: filesystem
+  -
+    type: filesystem
+    items_root: /subsites
+    content_dir: 'subsites'
+    layouts_dir: null
 
 string_pattern_type: glob

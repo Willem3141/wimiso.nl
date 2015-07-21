@@ -3,9 +3,6 @@ id: contact
 title: Contact
 ---
 
-Contact
-=======
-
 If you want to contact me, you can use the following methods.
 
 Email

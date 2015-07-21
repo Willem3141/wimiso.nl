@@ -1,17 +1,21 @@
-@import url(http://fonts.googleapis.com/css?family=Actor|Oxygen+Mono);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,400,400italic,300);
 
 html {
     height: 100%;
     hyphens: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 body {
-    font-family: "Actor", serif !important;
+    font-family: 'Open Sans', sans-serif;
     font-size: 12pt;
+    line-height: 25px;
     height: 100%;
-    background: white;
     text-rendering: optimizeLegibility;
     text-align: justify;
+    color: #222;
+    position: relative;
 }
 
 pre, code {
@@ -19,65 +23,80 @@ pre, code {
 }
 
 h1 {
-    font-weight: bold;
-    color: #b0836e;
-    padding-bottom: 10px;
-    border-bottom: 1px #eeeeee solid;
-    text-align: center;
+    color: #444;
+    font-weight: 700;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    padding-left: 1000px;
+    padding-right: 1000px;
+    margin-left: -1000px;
+    margin-right: -1000px;
+    margin-bottom: 20px;
+    background-color: #B54772;
+    color: white;
+    font-size: 32pt;
 }
 
-h2, h3 {
-    font-weight: bold;
-    color: #b0836e;
-    text-align: left;
+h2 {
+    font-weight: 300;
+    font-size: 32pt;
+    color: #B54772;
+    margin: 60px 0px 20px -1px;
+}
+
+h3 {
+    font-weight: 400;
+    color: #B54772;
 }
 
 h4, h5, h6 {
-    font-weight: bold;
-    color: #b0836e;
-    text-align: left;
+    font-weight: 400;
 }
 
 .outer-div {
     min-height: 100%;
     position: relative;
-    background: white;
+    background: #fcfcfc;
 }
 
 .content {
     padding-bottom: 4em;
 }
 
+/* De inhoudsopgave */
+#toc {
+    margin-top: -15px;
+}
+
+#toc, #toc .nav {
+    padding-left: 40px;
+    width: 220px;
+}
+#toc .nav li {
+    font-size: 11pt;
+}
+#toc .nav li.active {
+    font-weight: 700;
+}
+body.down #toc .nav {
+    position: fixed;
+    top: 25px;
+}
+
 /* De header */
-.header-top {
-    background: url("/static/img/header.jpg");
-    background-position: center right;
-    background-size: cover;
-    width: 100%;
-    height: 200px;
-    padding-top: 35px;
-    padding-right: 80px;
-}
-
-.header-title {
-    font-size: 400%;
-    color: white;
-    font-weight: bold;
-    text-align: right;
-}
-
-.header-subtitle {
-    font-size: 150%;
-    color: white;
-    text-align: right;
-    font-style: italic;
-}
-
 .navbar-default {
     border: none;
-    background: #f6f4cf;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+    background: #3C9A5C;
     border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: rgba(255, 255, 255, 0.95);
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: rgba(255, 255, 255, 1);
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -86,21 +105,35 @@ h4, h5, h6 {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-    background: #eee9a4;
+    background: #88BE4A;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: rgba(255, 255, 255, 1);
 }
 
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
-    background: #eee9a4;
-    color: #555;
+    background: #88BE4A;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .dropdown-menu {
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
-    background: #f6f4cf;
+    background: #3C9A5C;
     border-radius: 0px;
     border: none;
+}
+
+.dropdown-menu > li > a {
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .dropdown-menu > li > a:hover {
@@ -112,14 +145,6 @@ h4, h5, h6 {
     float: left;
     margin-top: 0px;
     margin-right: 1px;
-}
-
-/* De header-kloon */
-.header-bottom.clone {
-    position: fixed;
-    width: 100%;
-    z-index: 10;
-    display: none;
 }
 
 body.down .header-bottom.clone {

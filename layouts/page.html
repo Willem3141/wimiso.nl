@@ -1,7 +1,37 @@
 <% render '/default.html' do %>
-  <div class="row">
-    <div class="col-xs-12">
-      <%= yield %>
-    </div>
+  <div id="page-title-row" class="row">
+    <% if @item[:toc] %>
+      <div class="col-xs-12">
+        <h1><%= @item[:title] %></h1>
+      </div>
+    <% else %>
+      <div class="col-md-1 hidden-xs"></div>
+      <div class="col-xs-12 col-md-10">
+        <h1><%= @item[:title] %></h1>
+      </div>
+    <% end %>
+  </div>
+  <div id="content-row" class="row">
+    <% if @item[:toc] %>
+      <div class="col-xs-9">
+        <%= yield %>
+      </div>
+      <div class="col-xs-3">
+        <div id="toc">
+          <ul class="nav">
+          <h3>Contents</h3>
+            <li class="active" role="presentation"><a href="#blob">Blob</a></li>
+            <li role="presentation"><a href="#blaab">Blaab</a></li>
+            <li role="presentation"><a href="#bleeeeb">Lorem ipsum</a></li>
+            <li role="presentation"><a href="#bluuub">Dolor sit amet</a></li>
+          </ul>
+        </div>
+      </div>
+    <% else %>
+      <div class="col-md-1 hidden-xs"></div>
+      <div class="col-xs-12 col-md-10">
+        <%= yield %>
+      </div>
+    <% end %>
   </div>
 <% end %>

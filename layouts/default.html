@@ -14,9 +14,12 @@
     
     <!-- onze eigen zooi -->
     <link href="/static/css/layout.css" rel="stylesheet">
+    <% if item[:index_page] %>
+        <link href="/static/css/homepage.css" rel="stylesheet">
+    <% end %>
     <script src="/static/js/header.js"></script>
     
-    <% if @item[:needs_math] %>
+    <% if item[:needs_math] %>
         <script type="text/x-mathjax-config">
             MathJax.Hub.Config(
                 {
@@ -34,17 +37,9 @@
     
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
   </head>
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="outer-div">
       <header>
-        <div class="header-top">
-          <div class="header-title">
-            Wimiso <sup><span class="badge alert-success" style="transform: translate(0, -20px) rotate(-10deg); font-size: 35%; margin-left: -28px;">beta!</span></sup>
-          </div>
-          <div class="header-subtitle">
-            <%= _ :my_website %>
-          </div>
-        </div>
         <div class="header-bottom">
           <nav class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -62,6 +57,7 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <%= menu_link_to 'home' %>
+                  <%= menu_link_to 'research' %>
                   <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs']) %>
                   <%= menu_link_to 'contact' %>
                   <%= menu_link_to 'blog' %>

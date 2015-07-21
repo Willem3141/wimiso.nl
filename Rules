@@ -34,6 +34,9 @@ preprocess do
 end
 
 
+compile '/subsites/**/*' do
+end
+
 compile '/*/blog/tag/*' do
   filter :erb
   layout '/tag.html'
@@ -73,6 +76,10 @@ compile '/**/*' do
   end
 end
 
+
+route '/subsites/**/*' do
+  item.identifier.to_s.sub(/\A\/subsites/, '')
+end
 
 route '/*/blog/tag/*' do
   strip_default_language (item.identifier.without_ext + '/index.html')
