@@ -3,9 +3,6 @@ id: contact
 title: Contact
 ---
 
-Contact
-=======
-
 Wil je me bereiken, dan kun je de volgende methoden gebruiken.
 
 E-mail

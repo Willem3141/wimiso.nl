@@ -1,0 +1,170 @@
+@import "bootstrap-3.3.2/less/bootstrap.less";
+
+@import "blocks.less";
+@import "header.less";
+@import "subheader.less";
+@import "blog.less";
+
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:700,400,400italic,300');
+
+@font-family-sans-serif: "Open Sans", sans-serif;
+@font-family-monospace: "Oxygen Mono", monospace;
+
+@color-primary: #b54772;
+@color-secondary: #5774A9;
+@color-tertiary: #7997CE;
+
+@color-background: #ffffff;
+@color-footer: #eeeeee;
+
+@darken-amount: 3%;
+
+@color-text: #222222;
+
+@footer-height: 80px;
+
+@content-width: 1300px; // TODO verander dit en met media-query's en zo
+@content-margin: 40px;
+
+html {
+    height: 100%;
+    hyphens: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+body {
+    font-size: 12pt;
+    line-height: 25px;
+    height: 100%;
+    text-rendering: optimizeLegibility;
+    text-align: justify;
+    color: @color-text;
+    position: relative;
+}
+
+h1 {
+    color: #444;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+    font-size: 32pt;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 32pt;
+    color: @color-primary;
+    margin: 60px 0px 20px -1px;
+}
+
+h3 {
+    font-weight: 400;
+    color: @color-primary;
+}
+
+h4, h5, h6 {
+    font-weight: 400;
+}
+
+.outer-div {
+    min-height: 100%;
+    position: relative;
+}
+
+#content {
+    padding-bottom: @footer-height;
+}
+
+/* De inhoudsopgave */
+#toc {
+    margin-top: -15px;
+}
+
+#toc, #toc .nav {
+    padding-left: 40px;
+    width: 220px;
+}
+#toc .nav li {
+    font-size: 11pt;
+}
+#toc .nav li.active {
+    font-weight: 700;
+}
+body.down #toc .nav {
+    position: fixed;
+    top: 25px;
+}
+
+/* De footer */
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: @footer-height;
+    
+    text-align: center;
+    font-size: 80%;
+    color: rgba(0, 0, 0, 0.5);
+    
+    background-color: darken(@color-footer, @darken-amount);
+}
+#footer-inner {
+    background-color: @color-footer;
+    padding: 15px 0px;
+    height: @footer-height;
+    width: @content-width;
+}
+
+/* Sideboxes */
+.sidebox {
+    background: #f6f4cf;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+    text-align: left;
+}
+
+.blogpost-box {
+    position: relative;
+    background: #f6f4cf;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 15px;
+    padding-top: 1px;
+    margin-bottom: 30px;
+}
+
+/* this is so cool, my first media query ever :D */
+@media(min-width:992px) {
+    .blogpost-box.lower {
+        top: 80px;
+    }
+}
+
+/* Images */
+.image-container {
+    text-align: center;
+}
+
+.image {
+    display: inline-block;
+    width: 60%;
+    margin-bottom: 25px;
+    font-style: italic;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px #eeeeee solid;
+    border-bottom: 1px #eeeeee solid;
+}
+
+.image img {
+    max-width: 100%;
+}
+
+/* Publicaties */
+.publication-abstract-header {
+    font-weight: bold;
+    color: @color-primary;
+}
+
+.publication-abstract-text {
+    display: hidden;
+}

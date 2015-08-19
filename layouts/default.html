@@ -10,7 +10,6 @@
     
     <!-- Bootstrap -->
     <script src="/static/js/bootstrap.min.js"></script>
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- onze eigen zooi -->
     <link href="/static/css/layout.css" rel="stylesheet">
@@ -39,66 +38,69 @@
   </head>
   <body data-spy="scroll" data-target="#toc">
     <div class="outer-div">
+      
       <header>
-        <div class="header-bottom">
-          <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Navigatie aan/uit</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">Wimiso</a>
-              </div>
-              
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <%= menu_link_to 'home' %>
-                  <%= menu_link_to 'research' %>
-                  <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs']) %>
-                  <%= menu_link_to 'contact' %>
-                  <%= menu_link_to 'blog' %>
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container" id="navbar-inner">
+            <div class="navbar-header">
+              <a class="navbar-brand">Wimiso</a>
+            </div>
+            
+            <ul class="nav navbar-nav">
+              <%= menu_link_to 'home' %>
+              <%= submenu_to(:research, ['research', 'publications']) %>
+              <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs']) %>
+              <%= menu_link_to 'contact' %>
+              <%= menu_link_to 'blog' %>
+              <%= menu_link_to 'about-me' %>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<%= language_name_of @item %> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <% translations_of(@item).each do |t| %>
+                    <% if @item == t %>
+                      <li class="active">
+                        <a>
+                          <%= language_name_of(t) %>
+                        </a>
+                      </li>
+                    <% else %>
+                      <li>
+                        <a href="<%= t.path %>">
+                          <%= language_name_of t %>
+                        </a>
+                      </li>
+                    <% end %>
+                  <% end %>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<%= language_name_of @item %> <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <% translations_of(@item).each do |t| %>
-                        <% if @item == t %>
-                          <li class="active">
-                            <a>
-                              <%= language_name_of(t) %>
-                            </a>
-                          </li>
-                        <% else %>
-                          <li>
-                            <a href="<%= t.path %>">
-                              <%= language_name_of t %>
-                            </a>
-                          </li>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                  </li>
-                </ul>
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>
-        </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <nav class="subnavbar" role="navigation">
+          <div class="container" id="subnavbar-inner">
+            Bla!
+          </div>
+        </nav>
       </header>
       
-      <div class="content">
-        <div class="container">
-          <%= yield %>
+      <div id="everything-except-header">
+        <div id="title">
+            <div id="title-inner">
+            <h1><%= @item[:title] %></h1>
+            </div>
         </div>
-      </div>
-      
-      <div class="footer">
-        <div class="container">
-          &copy; 2014 &ndash; <%= Date.today.year %>&nbsp;&nbsp;Willem Sonke. <%= _ :footer_text %>
+        <div id="content">
+            <div id="content-inner">
+            <%= yield %>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <div id="footer-inner" class="container">
+            &copy; 2014 &ndash; <%= Date.today.year %>&nbsp;&nbsp;Willem Sonke. <%= _ :footer_text %>
+            </div>
         </div>
       </div>
     </div>

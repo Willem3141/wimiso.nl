@@ -34,6 +34,10 @@ preprocess do
 end
 
 
+compile '/static/css/layout.less' do
+    filter :less
+end
+
 compile '/subsites/**/*' do
 end
 
@@ -46,7 +50,7 @@ compile '/*/blog/**/*' do
   if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
     filter :erb
     if item[:extension] == 'md'
-      filter :kramdown
+      filter :kramdown, :auto_ids => true
     end
     if item[:needs_highlighting]
       filter :colorize_syntax, :default_colorizer => :pygmentsrb
@@ -63,7 +67,7 @@ compile '/**/*' do
   if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
     filter :erb
     if item[:extension] == 'md'
-      filter :kramdown
+      filter :kramdown, :auto_ids => true
     end
     if item[:needs_highlighting]
       filter :colorize_syntax, :default_colorizer => :pygmentsrb
@@ -76,6 +80,14 @@ compile '/**/*' do
   end
 end
 
+
+route '/static/css/layout.less' do
+    '/static/css/layout.css'
+end
+
+route '/static/css/**/*' do
+    nil
+end
 
 route '/subsites/**/*' do
   item.identifier.to_s.sub(/\A\/subsites/, '')

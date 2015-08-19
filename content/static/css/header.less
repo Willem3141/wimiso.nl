@@ -1,0 +1,36 @@
+/* De header */
+@navbar-margin-bottom: 0;
+@navbar-default-bg: darken(@color-secondary, @darken-amount);
+@navbar-default-color: rgba(255, 255, 255, 0.95);
+@navbar-border-radius: 0;
+
+@navbar-default-link-color: @navbar-default-color;
+@navbar-default-link-hover-color: rgba(255, 255, 255, 1);
+@navbar-default-link-hover-bg: @color-tertiary;
+@navbar-default-link-active-color: rgba(255, 255, 255, 1);
+@navbar-default-link-active-bg: @color-tertiary;
+
+@navbar-default-brand-color: @navbar-default-link-color;
+@navbar-default-brand-hover-color: @navbar-default-link-hover-color;
+@navbar-default-brand-hover-bg: transparent;
+
+.navbar-default {
+    border: none;
+}
+
+#navbar-inner {
+    background: @color-secondary;
+    width: @content-width;
+    padding: 0 @content-margin;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* this is a hack; see https://github.com/twbs/bootstrap/issues/10495 */
+.nav li a > .glyphicon, .dropdown-toggle > .glyphicon {
+    float: left;
+    margin-top: 0px;
+    margin-right: 1px;
+}

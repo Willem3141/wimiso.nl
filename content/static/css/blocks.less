@@ -1,0 +1,22 @@
+// the title block
+#title {
+    background-color: darken(@color-primary, @darken-amount);
+}
+#title-inner {
+    margin: 0 auto;
+    padding: 20px @content-margin;
+    width: @content-width;
+    background-color: @color-primary;
+}
+
+// the content block
+#content {
+    background-color: darken(@color-background, @darken-amount);
+}
+#content-inner {
+    margin: 0 auto;
+    padding: 20px @content-margin;
+    width: @content-width;
+    background-color: @color-background;
+    .clearfix();
+}

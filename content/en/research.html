@@ -1,12 +1,17 @@
 ---
 id: research
 title: Research
-layout: default
+layout: page
+toc: true
 ---
 
-<div class="row">
-  <div class="col-xs-12">
-    <h1>Research</h1>
-    <p>This page is under construction...</p>
-  </div>
-</div>
+<p>I am currently pursuing a PhD at the <a href="http://www.win.tue.nl/aga">Applied Geometric Algorithms</a> group of the <a href="http://www.tue.nl">Eindhoven University of Technology</a> in The Netherlands. On this page you can get an impression on what I'm working on.</p>
+
+<h2 id="mosaic-maps">Mosaic maps</h2>
+<p>A cartogram is a type of thematic map. Let's say that we want to make a cartogram depicting the population of countries. The idea is that countries with many inhabitants become large on the map, and countries with only few inhabitants become small. Hence, the area of a region corresponds to its population.</p>
+
+<p>There are many methods to make cartograms, that all have different properties. Since the areas of the regions need to be changed, every method must distort the shapes of the regions in some way. Some methods leave the detailed shapes intact but deform them to get the right areas. Other methods replace the regions entirely by simple shapes like rectangles.</p>
+
+<p>Together with Bettina Speckmann, Kevin Buchin, Thom Castermans, Astrid Pieterse and Rafael Cano, I looked at another way to make cartograms, that we call <i>mosaic maps</i>. For such a cartogram we use a hexagonal grid (as used by several games, like Settlers of Catan). We represent every region on the map by a group of hexagonal tiles. To get a proper cartogram, we need the areas to correspond to the population. But the area of a region is just its number of tiles. So, for example, every hexagon could represent 2 million inhabitants. The advantage of such a method is that the number of hexagons per region can be counted, so that viewers can obtain the population count more precisely than by just guessing the area.</p>
+
+<p>We found a way to create mosaic maps like these automatically using a two-step process. First we create a mosaic map that does not respect the regions' shapes at all: we only care for the correct connections between regions. So, if Germany borders Switzerland in the original map, we require that their groups of hexagons also touch. In the second step, we refine the drawing bit by bit by taking into account the desired shapes and sizes, until we get a nice drawing.</p>

@@ -1,0 +1,30 @@
+/* De subheader */
+header {
+    position: relative;
+    z-index: 10;
+}
+
+.subnavbar {
+    position: absolute;
+    width: 100%;
+    top: @navbar-height;
+    background: darken(@color-tertiary, @darken-amount);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+    display: none;
+    
+    body.submenu-down & {
+        display: block;
+    }
+
+    #subnavbar-inner {
+        background: @color-tertiary;
+        width: @content-width;
+        padding: 0 @content-margin;
+        color: white;
+        height: 150px; // TODO
+    }
+}
+
+body.submenu-down #everything-except-header {
+    filter: brightness(75%);
+}

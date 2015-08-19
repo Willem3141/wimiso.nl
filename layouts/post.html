@@ -1,20 +1,9 @@
 <% render '/default.html' do %>
-  <div class="row">
-    <div class="col-md-1 hidden-xs"></div>
-    <div class="col-xs-12 col-md-10">
-      <h1><%= item[:title] %></h1>
-      <div class="text-muted" style="text-align: center; margin-bottom: 25px;"><%= tags_for(@item, {base_url: "#{language_prefix_of @item}/blog/tag/", separator: " / "}) %> / <%= item[:created_at] %></div>
-      <article>
-        <%= yield %>
-      </article>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-1 hidden-xs"></div>
-    <div class="col-xs-12 col-md-10">
-        <h2><%= _(:comments) %></h2>
-        <script data-isso="//isso.wimiso.nl/" data-isso-lang="<%= @item[:language] %>" src="//isso.wimiso.nl/js/embed.min.js"></script>
-        <section id="isso-thread"></section>
-    </div>
-  </div>
+  <div class="text-muted" style="text-align: center; margin-bottom: 25px;"><%= tags_for(@item, {base_url: "#{language_prefix_of @item}/blog/tag/", separator: " / "}) %> / <%= item[:created_at] %></div>
+  <article>
+    <%= yield %>
+  </article>
+  <h2><%= _(:comments) %></h2>
+  <script data-isso="//isso.wimiso.nl/" data-isso-lang="<%= @item[:language] %>" src="//isso.wimiso.nl/js/embed.min.js"></script>
+  <section id="isso-thread"></section>
 <% end %>
