@@ -1,3 +1,17 @@
+// the header block
+#header {
+    background-image: url('/static/img/header.jpg');
+    background-size: cover;
+    background-position: bottom center;
+}
+#header-inner {
+    margin: 0 auto;
+    padding: 20px @content-margin;
+    width: @content-width;
+    height: 250px;
+    background-color: rgba(255, 255, 255, @darken-amount);
+}
+
 // the title block
 #title {
     background-color: darken(@color-primary, @darken-amount);

@@ -39,51 +39,53 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="outer-div">
       
-      <header>
-        <nav class="navbar navbar-default" role="navigation">
-          <div class="container" id="navbar-inner">
-            <div class="navbar-header">
-              <a class="navbar-brand">Wimiso</a>
-            </div>
-            
-            <ul class="nav navbar-nav">
-              <%= menu_link_to 'home' %>
-              <%= submenu_to(:research, ['research', 'publications']) %>
-              <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs']) %>
-              <%= menu_link_to 'contact' %>
-              <%= menu_link_to 'blog' %>
-              <%= menu_link_to 'about-me' %>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<%= language_name_of @item %> <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <% translations_of(@item).each do |t| %>
-                    <% if @item == t %>
-                      <li class="active">
-                        <a>
-                          <%= language_name_of(t) %>
-                        </a>
-                      </li>
-                    <% else %>
-                      <li>
-                        <a href="<%= t.path %>">
-                          <%= language_name_of t %>
-                        </a>
-                      </li>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <nav class="subnavbar" role="navigation">
-          <div class="container" id="subnavbar-inner">
-            Bla!
-          </div>
-        </nav>
+      <header id="header">
+        <div id="header-inner"></div>
       </header>
+    
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container" id="navbar-inner">
+          <div class="navbar-header">
+            <a class="navbar-brand">Wimiso</a>
+          </div>
+          
+          <ul class="nav navbar-nav">
+            <%= menu_link_to 'home' %>
+            <%= submenu_to(:research, ['research', 'publications']) %>
+            <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs', 'animations']) %>
+            <%= menu_link_to 'contact' %>
+            <%= menu_link_to 'blog' %>
+            <%= menu_link_to 'about-me' %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<%= language_name_of @item %> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <% translations_of(@item).each do |t| %>
+                  <% if @item == t %>
+                    <li class="active">
+                      <a>
+                        <%= language_name_of(t) %>
+                      </a>
+                    </li>
+                  <% else %>
+                    <li>
+                      <a href="<%= t.path %>">
+                        <%= language_name_of t %>
+                      </a>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <nav class="subnavbar" role="navigation">
+        <div class="container" id="subnavbar-inner">
+          Bla!
+        </div>
+      </nav>
       
       <div id="everything-except-header">
         <div id="title">
