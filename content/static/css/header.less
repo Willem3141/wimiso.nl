@@ -22,11 +22,29 @@
     top: 0;
     left: 0;
     width: 100%;
+    
+    .navbar-toggle:hover,
+    .navbar-toggle:focus {
+        background-color: @navbar-default-link-hover-bg;
+    }
+    
+    .navbar-toggle {
+        border: none;
+        
+        &.navbar-toggle:hover,
+        &.navbar-toggle:focus {
+            background-color: @navbar-default-link-hover-bg;
+        }
+        
+        .icon-bar {
+            background-color: @navbar-default-color;
+        }
+    }
 }
 
 #navbar-inner {
     background: @color-secondary;
-    width: @content-width;
+    .innerBlockWidth();
     padding: 0 @content-margin;
 }
 

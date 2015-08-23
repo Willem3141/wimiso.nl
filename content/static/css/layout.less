@@ -1,5 +1,6 @@
 @import "bootstrap-3.3.2/less/bootstrap.less";
 
+@import "mixins.less";
 @import "blocks.less";
 @import "header.less";
 @import "subheader.less";
@@ -11,7 +12,7 @@
 @font-family-monospace: "Oxygen Mono", monospace;
 
 @color-primary: #b54772;
-@color-secondary: #5774A9;
+@color-secondary: #5774A9; // if this is changed, also change the meta theme-color in the template
 @color-tertiary: #7997CE;
 
 @color-background: #ffffff;
@@ -23,7 +24,6 @@
 
 @footer-height: 80px;
 
-@content-width: 1300px; // TODO verander dit en met media-query's en zo
 @content-margin: 40px;
 
 html {
@@ -38,7 +38,10 @@ body {
     line-height: 25px;
     height: 100%;
     text-rendering: optimizeLegibility;
-    text-align: justify;
+    text-align: left;
+    @media (min-width: @screen-md) {
+        text-align: justify;
+    }
     color: @color-text;
     position: relative;
 }
@@ -49,6 +52,7 @@ h1 {
     margin: 0;
     color: white;
     font-size: 32pt;
+    text-align: left;
 }
 
 h2 {
@@ -56,15 +60,18 @@ h2 {
     font-size: 32pt;
     color: @color-primary;
     margin: 60px 0px 20px -1px;
+    text-align: left;
 }
 
 h3 {
     font-weight: 400;
     color: @color-primary;
+    text-align: left;
 }
 
 h4, h5, h6 {
     font-weight: 400;
+    text-align: left;
 }
 
 .outer-div {
@@ -113,7 +120,7 @@ body.down #toc .nav {
     background-color: @color-footer;
     padding: 15px 0px;
     height: @footer-height;
-    width: @content-width;
+    .innerBlockWidth();
 }
 
 /* Sideboxes */
@@ -146,7 +153,13 @@ body.down #toc .nav {
 
 .image {
     display: inline-block;
-    width: 60%;
+    width: 100%;
+    @media (min-width: @screen-xs) {
+        width: 80%;
+    }
+    @media (min-width: @screen-sm) {
+        width: 60%;
+    }
     margin-bottom: 25px;
     font-style: italic;
     padding-top: 10px;

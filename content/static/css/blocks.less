@@ -7,8 +7,11 @@
 #header-inner {
     margin: 0 auto;
     padding: 20px @content-margin;
-    width: @content-width;
-    height: 250px;
+    .innerBlockWidth();
+    height: 150px;
+    @media (min-width: @screen-xs) {
+        height: 250px;
+    }
     background-color: rgba(255, 255, 255, @darken-amount);
 }
 
@@ -19,7 +22,7 @@
 #title-inner {
     margin: 0 auto;
     padding: 20px @content-margin;
-    width: @content-width;
+    .innerBlockWidth();
     background-color: @color-primary;
 }
 
@@ -30,7 +33,7 @@
 #content-inner {
     margin: 0 auto;
     padding: 20px @content-margin;
-    width: @content-width;
+    .innerBlockWidth();
     background-color: @color-background;
     .clearfix();
 }
