@@ -1,7 +1,7 @@
 <% render '/default.html' do %>
   <% if @item[:toc] %>
     <%= yield %>
-    <div id="toc">
+    <%#<div id="toc">
         <ul class="nav">
         <h3>Contents</h3>
         <li class="active" role="presentation"><a href="#blob">Blob</a></li>
@@ -9,7 +9,7 @@
         <li role="presentation"><a href="#bleeeeb">Lorem ipsum</a></li>
         <li role="presentation"><a href="#bluuub">Dolor sit amet</a></li>
         </ul>
-    </div>
+    </div>%>
   <% else %>
     <%= yield %>
   <% end %>
