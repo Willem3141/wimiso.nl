@@ -1,11 +1,32 @@
 ---
 id: research
 title: Onderzoek
-layout: default
+layout: page
+toc: true
 ---
 
-<div class="row">
-  <div class="col-xs-12">
-    <p>Inhoud volgt binnenkort...</p>
-  </div>
-</div>
+<p>Ik ben momenteel aan het promoveren bij de vakgroep <a href="http://www.win.tue.nl/aga">Applied Geometric Algorithms</a> van de <a href="http://www.tue.nl">Technische Universiteit Eindhoven</a>. Op deze pagina kun je lezen waar ik zoal mee bezig ben.</p>
+
+<h2 id="mosaic-maps">Mozaïek-kaarten</h2>
+<p>Een cartogram is een soort thematische kaart. Stel dat we een cartogram willen maken van het aantal inwoners van landen. Het idee is dat landen met veel inwoners groot op de kaart komen te staan, terwijl landen met weinig inwoners klein worden. De oppervlakte van een land komt dus overeen met zijn bevolkingsaantal.</p>
+
+<p>Er zijn veel manieren bekend om cartogrammen te maken, en al die manieren hebben andere eigenschappen. Omdat de oppervlakten van de gebieden veranderd moet worden, moet iedere methode de vormen van de gebieden op de een of andere manier veranderen. Sommige methoden laten de gedetailleerde vormen van landen intact maar vervormen ze om de oppervlakten goed te krijgen. Andere methoden vervangen de gebieden helemaal door eenvoudige vormen, zoals rechthoeken.</p>
+
+<p>Samen met Bettina Speckmann, Kevin Buchin, Thom Castermans, Astrid Pieterse en Rafael Cano, heb ik gekeken naar een andere manier om cartogrammen te maken, die we <i>mozaïek-kaarten</i> noemen (of in het Engels <i>mosaic maps</i>). Voor zo'n cartogram gebruiken we een zeshoekig rooster (zoals het speelbord van De Kolonisten van Catan). We representeren ieder gebied op de kaart dan door een groepje zeshoekige tegels. Om een correct cartogram te krijgen, moeten we ervoor zorgen dat de oppervlakten overeenkomen met het inwoneraantal. Maar de oppervlakte van een gebied is het aantal tegels. We kunnen dus bijvoorbeeld zeggen dat iedere tegel 2 miljoen inwoners voorstelt. Het voordeel van zo'n methode is dat je het aantal zeshoeken per gebied kunt tellen, zodat mensen die het cartogram bekijken vrij precies kunnen bepalen wat het aantal inwoners is.</p>
+
+<p>We hebben een manier bedacht om zulke mozaïek-kaarten automatisch te maken met een proces dat uit twee stappen bestaat. Als eerste maken we een mozaïek-kaart die totaal geen rekening houdt met de vormen van de gebieden: het gaat tijdens deze stap alleen erom dat we de juiste gebieden aan elkaar laten grenzen. Als Duitsland bijvoorbeeld in de oorspronkelijke kaart grenst aan Zwisterland, dan willen we dat de groepjes zeshoeken die bij die landen horen ook aan elkaar grenzen. In de tweede stap verfijnen we het cartogram stap voor stap door rekening te houden met de gewenste vormen en oppervlakten, totdat we een mooi plaatje krijgen.</p>
+
+<h2 id="log-visualization">Log-visualisatie</h2>
+<p>Als je een huis wilt gaan bouwen, heb je een vergunning nodig. Dus vraag je aan de gemeente om een vergunning. De mensen die verantwoordelijk zijn voor het afhandelen van dat soort aanvragen controleren dan een aantal dingen, en ze geven je de vergunning (als je aanvraag aan alle eisen voldoet). Om ervoor te zorgen dat alle aanvragen op dezelfde manier worden afgehandeld, is er waarschijnlijk een of ander proces dat altijd wordt gevolgd bij het afhandelen van een aanvraag.</p>
+
+<p>Het is vaak niet makkelijk om een indruk te krijgen van wat er allemaal gebeurt in zo'n proces. We kunnen beginnen door het proces te observeren: we kijken hoe een aanvraag wordt afgehandeld, en schrijven alles op wat er gebeurt. Je krijgt dan lijsten van gebeurtenissen, zoals
+<center>
+<i>lees aanvraag, controleer eisen, verleen vergunning</i>,
+</center>
+of
+<center>
+<i>lees aanvraag, controleer eisen, wijs vergunning af</i>.
+</center>
+</p>
+
+<p>Stel nu dat we naar een ingewikkelder proces kijken dan dit voorbeeld, en dat we duizenden gebeurtenissen hebben opgeschreven. In zo'n geval willen we niet met de hand door al die gegevens graven om te zien hoe het proces werkt. Voor het eindproject van mijn studie heb ik enkele manieren onderzocht om dit automatisch te doen.</p>
