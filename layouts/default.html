@@ -14,7 +14,12 @@
     <script src="/static/js/bootstrap.min.js"></script>
     
     <!-- onze eigen zooi -->
-    <link href="/static/css/layout.css" rel="stylesheet">
+    <% if item[:index_page] %>
+        <link href="/static/css/homepage.css" rel="stylesheet">
+    <% else %>
+        <link href="/static/css/layout.css" rel="stylesheet">
+    <% end %>
+    
     <script src="/static/js/header.js"></script>
     
     <% if item[:needs_math] %>
@@ -48,77 +53,34 @@
     
     <div class="outer-div">
       
-      <header id="header">
-        <div id="header-inner"></div>
-      </header>
-    
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container" id="navbar-inner">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">Wimiso</a>
-          </div>
-          
-          <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav">
-              <%= menu_link_to 'home' %>
-              <%= submenu_to(:research, ['research', 'publications']) %>
-              <%= submenu_to(:projects, ['joxy', 'ti-programs', 'fonts', 'graduates-viewer', 'conlangs']) %>
-              <%= menu_link_to 'contact' %>
-              <%= menu_link_to 'blog' %>
-              <%= menu_link_to 'about-me' %>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;<%= language_name_of @item %> <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <% translations_of(@item).each do |t| %>
-                    <% if @item == t %>
-                      <li class="active">
-                        <a>
-                          <%= language_name_of(t) %>
-                        </a>
-                      </li>
-                    <% else %>
-                      <li>
-                        <a href="<%= t.path %>">
-                          <%= language_name_of t %>
-                        </a>
-                      </li>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <nav class="subnavbar" role="navigation">
-        <div class="container" id="subnavbar-inner">
-          Bla!
-        </div>
-      </nav>
+      <% if @item[:short_header] %>
+        <div id="navbar-strut"></div>
+      <% else %>
+        <header id="header">
+            <div id="header-inner"></div>
+        </header>
+      <% end %>
       
-      <div id="everything-except-header">
-        <div id="title">
-            <div id="title-inner">
-            <h1><%= @item[:title] %></h1>
-            </div>
+      <% if @item[:navbar] %>
+        <%= render "/navbars/" + @item[:navbar] + ".html" %>
+      <% else %>
+        <%= render "/navbars/main.html" %>
+      <% end %>
+    
+      <div id="title">
+        <div id="title-inner">
+          <h1><%= @item[:title] %></h1>
         </div>
-        <div id="content">
-            <div id="content-inner">
-            <%= yield %>
-            </div>
+      </div>
+      <div id="content">
+        <div id="content-inner">
+          <%= yield %>
         </div>
-        
-        <div id="footer">
-            <div id="footer-inner" class="container">
-            &copy; 2014 &ndash; <%= Date.today.year %>&nbsp;&nbsp;Willem Sonke. <%= _ :footer_text %>
-            </div>
+      </div>
+      
+      <div id="footer">
+        <div id="footer-inner" class="container">
+          &copy; 2014 &ndash; <%= Date.today.year %>&nbsp;&nbsp;Willem Sonke. <%= _ :footer_text %>
         </div>
       </div>
     </div>

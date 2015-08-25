@@ -34,7 +34,15 @@ preprocess do
 end
 
 
+compile '/static/css/bootstrap-3.3.2/less/bootstrap.less' do
+    filter :less
+end
+
 compile '/static/css/layout.less' do
+    filter :less
+end
+
+compile '/static/css/homepage.less' do
     filter :less
 end
 
@@ -81,8 +89,16 @@ compile '/**/*' do
 end
 
 
+route '/static/css/bootstrap-3.3.2/less/bootstrap.less' do
+    '/static/css/bootstrap.css'
+end
+
 route '/static/css/layout.less' do
     '/static/css/layout.css'
+end
+
+route '/static/css/homepage.less' do
+    '/static/css/homepage.css'
 end
 
 route '/static/css/**/*' do

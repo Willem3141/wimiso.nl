@@ -1,0 +1,627 @@
+---
+id: navi-verbs
+title: Werkwoorden in het Na'vi
+short_title: Werkwoorden
+layout: default
+short_header: yes
+navbar: navi
+---
+
+<style>
+    .prefirst {
+        color: #dd2255;
+        font-weight: bold;
+    }
+    .first {
+        color: #229955;
+        font-weight: bold;
+    }
+    .second {
+        color: #2255dd;
+        font-weight: bold;
+    }
+    .no-highlight .prefirst {
+        color: inherit;
+        font-weight: inherit;
+    }
+    .no-highlight .first {
+        color: inherit;
+        font-weight: inherit;
+    }
+    .no-highlight .second {
+        color: inherit;
+        font-weight: inherit;
+    }
+    .prefix {
+        font-weight: bold;
+    }
+    .suffix {
+        font-weight: bold;
+    }
+    #options-table th {
+        text-align: right;
+    }
+    .result {
+        font-size: 200%;
+    }
+</style>
+<p>Dit is een pagina die de vervoeging van werkwoorden in het Na'vi laat zien. Werkwoorden worden vervoegd door tussenvoegsels (infixes) op bepaalde posities in de basisvorm van het werkwoord te plaatsen. Typ hieronder de basisvorm van een werkwoord in om te beginnen.</p>
+<form>
+    <center>
+        <input id="verb-input" type="text" class="form-control" style="width: 300px;" placeholder="Typ een werkwoord in..."></input>
+        <div id="infix-found-message" style="display: none; text-align: center;">
+            Infix positions: <b><span id="infix-found-infix">.</span></b>
+            <br>
+            <span class="text-muted" style="font-size: 75%">(De gegevens over de positie van infixes komen uit <a href="http://eanaeltu.learnnavi.org/dicts/NaviData.sql">de database-dump van <i>Eana Eltu</i></a>, die is vrijgegeven onder de <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/"><i>CC-BY-SA-NC 3.0 Unported</i></a>-licentie.)</span>
+        </div>
+    </center>
+</form>
+<br>
+<div id="infix-error" class="alert alert-warning" style="display: none;">Ik weet de infix-posities van dit werkwoord helaas niet, dus ik weet niet waar de infixes geplaatst moeten worden. Ik kan je nog steeds helpen als je de infix-posities aangeeft met puntjes ("<b>.</b>"). Bijvoorbeeld: "<b>t.ar.on</b>"; "<b>yomt..ìng</b>"; "<b>kelku s..i</b>".</div>
+<div id="infix-position-error" class="alert alert-danger" style="display: none;">Deze infix-posities kunnen niet kloppen: infixes moeten geplaatst worden voor een klinker. Zoek de juiste infix-posities voor dit werkwoord op.</div>
+<div id="continuation" style="display: none;">
+    <p>Geef nu hieronder aan welke infixes je wilt gebruiken. Niet alle combinaties zijn mogelijk; in zo'n geval worden de bijbehorende knoppen grijs om aan te geven dat je ze niet kunt gebruiken.</p>
+    <form>
+        <center>
+            <table id="options-table" class="table table-hover" style="width: 80%;">
+                <tr id="transitivity-row">
+                    <th>Transitiviteit</th>
+                    <td>
+                        <p><i>Deze infixes veranderen de transitiviteit van het werkwoord. De oorzaak-vorm maakt een intransitief werkwoord transitief ("... zorgt ervoor dat ... jaagt"); de zichzelf-vorm maakt een transitief werkwoord intransitief ("... jaagt op zichzelf").</i></p>
+                        <div id="transitivity-buttons" class="btn-group" data-toggle="buttons">
+                            <label onclick="update()" class="btn btn-default active" id="transitivity-none">
+                                <input type="radio" checked> Geen
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="transitivity-causative">
+                                <input type="radio"> Oorzaak <i>(eyk)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="transitivity-reflexive">
+                                <input type="radio"> Zichzelf <i>(äp)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="transitivity-both">
+                                <input type="radio"> Beide
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="mode-row">
+                    <th>Modus</th>
+                    <td>
+                        <p><i>De aanvoegende wijs beschrijft een wens of wordt gebruikt met modale werkwoorden. Met de aanvoegende wijs zijn er minder mogelijkheden voor tijd en aspect. Een deelwoord is een bijvoeglijk naamwoord dat wordt gemaakt van een werkwoord. Deelwoorden kunnen geen tijd, aspect of gevoel hebben.</i></p>
+                        <div id="mode-buttons" class="btn-group" data-toggle="buttons">
+                            <label onclick="update()" class="btn btn-default active" id="mode-not">
+                                <input type="radio" checked> Geen
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mode-subjunctive">
+                                <input type="radio"> Aanvoegende wijs <i>(iv)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mode-active-participle">
+                                <input type="radio"> Actief deelwoord <i>(us)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mode-passive-participle">
+                                <input type="radio"> Passief deelwoord <i>(awn)</i>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="aspect-row">
+                    <th>Aspect</th>
+                    <td>
+                        <p><i>Hoe de spreker de actie wil weergeven. Perfectief: de actie wordt voorgesteld als één voltooid geheel; imperfectief: de actie wordt voorgesteld als een &lsquo;achtergrond&rsquo; voor andere acties.</i></p>
+                        <div id="aspect-buttons" class="btn-group" data-toggle="buttons">
+                            <label onclick="update()" class="btn btn-default active" id="aspect-none">
+                                <input type="radio" checked> Niet aangegeven
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="aspect-perfective">
+                                <input type="radio"> Perfectief <i>(ol)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="aspect-imperfective">
+                                <input type="radio"> Imperfectief <i>(er)</i>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="tense-row">
+                    <th>Tijd</th>
+                    <td>
+                        <p><i>Wanneer de actie plaatsvond / plaatsvindt.</i></p>
+                        <div id="tense-buttons" class="btn-group" data-toggle="buttons">
+                            <label onclick="update()" class="btn btn-default active" id="tense-none">
+                                <input type="radio" checked> Niet aangegeven
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="tense-past">
+                                <input type="radio"> Verleden <i>(am)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="tense-near-past">
+                                <input type="radio"> Nabij verleden <i>(ìm)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="tense-near-future">
+                                <input type="radio"> Nabije toekomst <i>(ìy)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="tense-future">
+                                <input type="radio"> Toekomst <i>(ay)</i>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="intent-row">
+                    <th>Bedoeling</th>
+                    <td>
+                        <p><i>Of de spreker van plan is om de actie te gaan doen. Dit wordt alleen gebruikt met de toekomende tijd en geen aspect.</i></p>
+                        <div id="intent-buttons" class="btn-group" data-toggle="buttons">
+                            <label onclick="update()" class="btn btn-default active" id="intent-none">
+                                <input type="radio" checked> Geen
+                            </label>
+                            <label onclick="update()" class="btn btn-default disabled" id="intent-intent">
+                                <input type="radio"> Toekomst met bedoeling <i>(-s-)</i>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="mood-row">
+                    <th>Gevoel</th>
+                    <td>
+                        <p><i>Wat de spreker vindt van de actie.</i></p>
+                        <div id="mood-buttons" class="btn-group" data-toggle="buttons">
+                            <label onclick="update()" class="btn btn-default active" id="mood-none">
+                                <input type="radio" checked> Niet aangegeven
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mood-positive">
+                                <input type="radio"> Positief <i>(ei)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mood-negative">
+                                <input type="radio"> Negatief <i>(äng)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mood-formal">
+                                <input type="radio"> Formeel <i>(uy)</i>
+                            </label>
+                            <label onclick="update()" class="btn btn-default" id="mood-inferential">
+                                <input type="radio"> Blijkbaar / schijnbaar <i>(ats)</i>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+    <center>
+        <p><b>Resultaat:</b></p>
+        <span id="result"></span>
+        <div id="participle-only-attributive-warning" class="alert alert-info" style="display: none;">
+            <b>Let op:</b> je kunt deelwoorden alleen gebruiken bij een zelfstandig naamwoord.
+            Ofwel, je kunt niet zeggen
+            <i>"&lt;zelfstandig naamwoord&gt; lu <span id="result-participle"></span>"</i>;
+            maar alleen
+            <i>"&lt;zelfstandig naamwoord&gt; <span id="prefix-result-participle"></span>"</i> of
+            <i>"<span id="suffix-result-participle"></span> &lt;zelfstandig naamwoord&gt;"</i>.
+        </div>
+        <div id="participle-transitivity-warning" class="alert alert-warning" style="display: none;">
+            <b>Waarschuwing:</b> het is niet duidelijk of deze vorm bestaat. Zie <a href="http://forum.learnnavi.org/advanced-grammar/reflexive-or-causative-in-a-participle">deze discussie</a> (Engels).
+        </div>
+        <div>&nbsp;</div>
+    </center>
+</div>
+
+<script src="/static/js/navi/infix-database.js"></script>
+
+<script>
+    var typingTimeout
+    var previousVerb
+    $(document).ready(function() {
+        $('#verb-input').keyup(function() {
+            
+            if ($('#verb-input').val() === previousVerb) {
+                return
+            }
+            //$('#declension-table').fadeOut()
+            previousVerb = $('#verb-input').val()
+            
+            var el = this
+            
+            if (typingTimeout) {
+                clearTimeout(typingTimeout)
+            }
+            typingTimeout = setTimeout(function() {
+                realUpdate.call(el)
+            }, 500)
+        });
+        realUpdate()
+    });
+    
+    function update() {
+        setTimeout(function() {
+            realUpdate()
+        }, 0)
+    }
+    
+    function realUpdate() {
+        updateDisabledButtons()
+        
+        var root = $('#verb-input').val()
+        // no input? then no error, but also no results ;)
+        if (!root) {
+            $('#infix-found-message').slideUp()
+            $('#infix-error').slideUp()
+            $('#infix-position-error').slideUp()
+            $('#continuation').fadeOut()
+            return
+        }
+        
+        // find the two dots
+        var firstPos = root.indexOf(".")
+        var secondPos = root.indexOf(".", firstPos + 1)
+        if (firstPos === -1 || secondPos === -1) {
+            // no infixes indicated, let's look up the verb in the database then
+            if (infixDatabase[root]) {
+                root = infixDatabase[root]
+                $('#infix-found-message').slideDown()
+                $('#infix-found-infix').html(root)
+                firstPos = root.indexOf(".")
+                secondPos = root.indexOf(".", firstPos + 1)
+            } else {
+                $('#infix-found-message').slideUp()
+                $('#infix-error').slideDown()
+                $('#infix-position-error').slideUp()
+                $('#continuation').fadeOut()
+                return
+            }
+        } else {
+            // okay, the user has indicated infixes
+            $('#infix-found-message').slideUp()
+            
+            // sanity check: is there a vowel after the infixes?
+            if (!(root.substring(firstPos + 1, firstPos + 2) === "a" ||
+                    root.substring(firstPos + 1, firstPos + 2) === "ä" ||
+                    root.substring(firstPos + 1, firstPos + 2) === "e" ||
+                    root.substring(firstPos + 1, firstPos + 2) === "i" ||
+                    root.substring(firstPos + 1, firstPos + 2) === "ì" ||
+                    root.substring(firstPos + 1, firstPos + 2) === "o" ||
+                    root.substring(firstPos + 1, firstPos + 2) === "u" ||
+                    root.substring(firstPos + 1, firstPos + 3) === "ll" ||
+                    root.substring(firstPos + 1, firstPos + 3) === "rr" ||
+                    root.substring(firstPos + 1, firstPos + 2) === ".")) {
+                $('#infix-error').slideUp()
+                $('#infix-position-error').slideDown()
+                $('#continuation').fadeOut()
+                return
+            }
+            if (!(root.substring(secondPos + 1, secondPos + 2) === "a" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "ä" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "e" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "i" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "ì" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "o" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "u" ||
+                    root.substring(secondPos + 1, secondPos + 3) === "ll" ||
+                    root.substring(secondPos + 1, secondPos + 3) === "rr" ||
+                    root.substring(secondPos + 1, secondPos + 2) === "(")) {
+                $('#infix-error').slideUp()
+                $('#infix-position-error').slideDown()
+                $('#continuation').fadeOut()
+                return
+            }
+        }
+        
+        $('#infix-error').slideUp()
+        $('#infix-position-error').slideUp()
+        $('#continuation').fadeIn()
+        
+        // find the text between the dots
+        var beforeFirst = root.substring(0, firstPos)
+        var between = root.substring(firstPos + 1, secondPos)
+        var afterSecond = root.substring(secondPos + 1)
+        
+        // a special case for "zenke"
+        if (afterSecond.substring(0, 3) === "(e)") {
+            if ($('#mood-formal').hasClass('active') || $('#mood-inferential').hasClass('active')) {
+                var afterSecond = "e" + afterSecond.substring(3)
+            } else {
+                var afterSecond = afterSecond.substring(3)
+            }
+        }
+        
+        var prefirst = prefirstInfix()
+        var first = firstInfix()
+        var second = secondInfix(afterSecond)
+        
+        // Horen 2.3.2. Two special cases:
+        var word
+        
+        // 1) first infix = "ol"; next syllable starts with "ll" ->
+        //                              either "ol" or "ll" disappears, dependent on stress
+        if ((between + second + afterSecond).substring(0, 2) === "ll" && first === "<span class='first'>ol</span>") {
+            var word = "<table><tr>" +
+                    "<td style='text-align: right;'><span class='muted'><i>if stress on <b>ll</b></i>:</span></td><td>&nbsp;</td>" +
+                    "<td><span class='result'>" +
+                    buildResult(beforeFirst, prefirst, "-", between, second, afterSecond) +
+                    "</span></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style='text-align: right;'><span class='muted'><i>else:</i></span></td><td></td>" +
+                    "<td><span class='result'>" +
+                    buildResult(beforeFirst, prefirst, first, between.substring(2), second, !between ? afterSecond.substring(2) : afterSecond) +
+                    "</span></td>" +
+                    "</tr></table>"
+                    
+        // 2) first infix = "er"; next syllable starts with "rr" ->
+        //                              either "er" or "rr" disappears, dependent on stress
+        } else if ((between + second + afterSecond).substring(0, 2) === "rr" && first === "<span class='first'>er</span>") {
+            var word = "<table><tr>" +
+                    "<td style='text-align: right;'><span class='muted'><i>if stress on <b>rr</b></i>:</span></td><td>&nbsp;</td>" +
+                    "<td><span class='result'>" +
+                    buildResult(beforeFirst, prefirst, "-", between, second, afterSecond) +
+                    "</span></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style='text-align: right;'><span class='muted'><i>else:</i></span></td><td></td>" +
+                    "<td><span class='result'>" +
+                    buildResult(beforeFirst, prefirst, first, between.substring(2), second, !between ? afterSecond.substring(2) : afterSecond) +
+                    "</span></td>" +
+                    "</tr></table>"
+                    
+        // no special case
+        } else {
+            var word = "<span class='result'>" +
+                    buildResult(beforeFirst, prefirst, first, between, second, afterSecond) +
+                    "</span>"
+        }
+        
+        // now output the result
+        $('#result').html(word)
+        
+        // finally, the warnings and notes...
+        
+        // the participles-only-attributive warning
+        if ($('#mode-active-participle').hasClass('active') || $('#mode-passive-participle').hasClass('active')) {
+            $('#participle-only-attributive-warning').slideDown()
+            $('#result-participle').html("<span class='no-highlight'>" + beforeFirst + prefirst + first + between + second + afterSecond + "</span>")
+            $('#prefix-result-participle').html(prefixedAdjective(beforeFirst + prefirst + first + between + second + afterSecond))
+            $('#suffix-result-participle').html(suffixedAdjective(beforeFirst + prefirst + first + between + second + afterSecond))
+        } else {
+            $('#participle-only-attributive-warning').slideUp()
+        }
+        
+        // TODO when result is known: add the special warning if participle + transitivity infix
+        if (($('#mode-active-participle').hasClass('active') || $('#mode-passive-participle').hasClass('active')) &&
+                    !($('#transitivity-none').hasClass('active'))) {
+            $('#participle-transitivity-warning').slideDown()
+        } else {
+            $('#participle-transitivity-warning').slideUp()
+        }
+    }
+    
+    function updateDisabledButtons() {
+        
+        // reflexive infix cannot be combined with passive participles
+        // (http://forum.learnnavi.org/language-updates/reflexive-causative-in-combination-with-the-infixes-ltusgt-and-ltawngt)
+        if ($('#transitivity-reflexive').hasClass('active') || $('#transitivity-both').hasClass('active')) {
+            disableAndReplaceBy($('#mode-passive-participle'), $('#mode-not'))
+        } else {
+            enable($('#mode-passive-participle'))
+        }
+        
+        // participles cannot have aspect, tense, intent, mood
+        if ($('#mode-active-participle').hasClass('active') || $('#mode-passive-participle').hasClass('active')) {
+            
+            disableAndReplaceBy($('#aspect-row label'), $('#aspect-none'))
+            disableAndReplaceBy($('#tense-row label'), $('#tense-none'))
+            disableAndReplaceBy($('#intent-row label'), $('#intent-none'))
+            disableAndReplaceBy($('#mood-row label'), $('#mood-none'))
+            
+            return
+        }
+        
+        enable($('#aspect-row label'))
+        enable($('#tense-row label'))
+        
+        // with the subjunctive, no "near" tense gradations are possible...
+        if ($('#mode-subjunctive').hasClass('active')) {
+            disableAndReplaceBy($('#tense-near-past'), $('#tense-none'))
+            disableAndReplaceBy($('#tense-near-future'), $('#tense-none'))
+            
+            // ... and we cannot combine aspect and tense anymore
+            if (!$('#aspect-none').hasClass('active')) {
+                disableAndReplaceBy($('#tense-past'), $('#tense-none'))
+                disableAndReplaceBy($('#tense-future'), $('#tense-none'))
+            }
+        }
+        
+        // intent cannot be present if aspect is marked, and we have a future tense
+        if ($('#mode-not').hasClass('active') && $('#aspect-none').hasClass('active') &&
+                    ($('#tense-near-future').hasClass('active') || $('#tense-future').hasClass('active'))) {
+            enable($('#intent-intent'))
+        } else {
+            disableAndReplaceBy($('#intent-intent'), $('#intent-none'))
+        }
+        
+        enable($('#mood-row label'))
+    }
+    
+    function disableAndReplaceBy($toDisable, $toReplaceBy) {
+        
+        var shouldReplace = false
+        for (var i = 0; i < $toDisable.length; i++) {
+            var child = $toDisable[i]
+            if ($(child).hasClass('active')) {
+                shouldReplace = true
+            }
+        }
+        
+        $toDisable.addClass('disabled')
+        $toDisable.removeClass('active')
+        $toDisable.children('input').prop('checked', false)
+        
+        $toReplaceBy.removeClass('disabled')
+        if (shouldReplace) {
+            $toReplaceBy.addClass('active')
+            $toReplaceBy.children('input').prop('checked', true)
+        }
+    }
+    
+    function enable($toEnable) {
+        $toEnable.removeClass('disabled')
+    }
+    
+    // finds and returns the pre-first infix
+    function prefirstInfix() {
+        if ($('#transitivity-causative').hasClass('active')) {
+            return "<span class='prefirst'>eyk</span>"
+        } else if ($('#transitivity-reflexive').hasClass('active')) {
+            return "<span class='prefirst'>äp</span>"
+        } else if ($('#transitivity-both').hasClass('active')) {
+            return "<span class='prefirst'>äpeyk</span>"
+        } else {
+            return ""
+        }
+    }
+    
+    // finds and returns the first infix
+    // yes, I know, this function is large and ugly ;)
+    function firstInfix() {
+        if ($('#mode-active-participle').hasClass('active')) {
+            return "<span class='first'>us</span>"
+        } else if ($('#mode-passive-participle').hasClass('active')) {
+            return "<span class='first'>awn</span>"
+        } else if ($('#mode-subjunctive').hasClass('active')) {
+            
+            // subjunctive infixes
+            if ($('#tense-future').hasClass('active')) {
+                return "<span class='first'>ìyev/iyev</span>"
+                
+            } else if ($('#tense-none').hasClass('active')) {
+                if ($('#aspect-none').hasClass('active')) {
+                    return "<span class='first'>iv</span>"
+                } else if ($('#aspect-perfective').hasClass('active')) {
+                    return "<span class='first'>ilv</span>"
+                } else {
+                    return "<span class='first'>irv</span>"
+                }
+                
+            } else if ($('#tense-past').hasClass('active')) {
+                return "<span class='first'>imv</span>"
+            }
+            
+        } else {
+            
+            // non-subjunctive infixes
+            if ($('#tense-future').hasClass('active')) {
+                if ($('#aspect-none').hasClass('active')) {
+                    if ($('#intent-none').hasClass('active')) {
+                        return "<span class='first'>ay</span>"
+                    } else {
+                        return "<span class='first'>asy</span>"
+                    }
+                } else if ($('#aspect-perfective').hasClass('active')) {
+                    return "<span class='first'>aly</span>"
+                } else {
+                    return "<span class='first'>ary</span>"
+                }
+                
+            } else if ($('#tense-near-future').hasClass('active')) {
+                if ($('#aspect-none').hasClass('active')) {
+                    if ($('#intent-none').hasClass('active')) {
+                        return "<span class='first'>ìy</span>"
+                    } else {
+                        return "<span class='first'>ìsy</span>"
+                    }
+                } else if ($('#aspect-perfective').hasClass('active')) {
+                    return "<span class='first'>ìly</span>"
+                } else {
+                    return "<span class='first'>ìry</span>"
+                }
+                
+            } else if ($('#tense-none').hasClass('active')) {
+                if ($('#aspect-none').hasClass('active')) {
+                    return ""
+                } else if ($('#aspect-perfective').hasClass('active')) {
+                    return "<span class='first'>ol</span>"
+                } else {
+                    return "<span class='first'>er</span>"
+                }
+                
+            } else if ($('#tense-near-past').hasClass('active')) {
+                if ($('#aspect-none').hasClass('active')) {
+                    return "<span class='first'>ìm</span>"
+                } else if ($('#aspect-perfective').hasClass('active')) {
+                    return "<span class='first'>ìlm</span>"
+                } else {
+                    return "<span class='first'>ìrm</span>"
+                }
+                
+            } else if ($('#tense-past').hasClass('active')) {
+                if ($('#aspect-none').hasClass('active')) {
+                    return "<span class='first'>am</span>"
+                } else if ($('#aspect-perfective').hasClass('active')) {
+                    return "<span class='first'>alm</span>"
+                } else {
+                    return "<span class='first'>arm</span>"
+                }
+            }
+        }
+    }
+    
+    // finds and returns the second infix
+    function secondInfix(afterSecond) {
+        
+        if ($('#mood-positive').hasClass('active')) {
+            // Horen 2.3.3
+            if (afterSecond.charAt(0) === "i" || afterSecond.charAt(0) === "ì" || afterSecond.substring(0, 2) === "ll" || afterSecond.substring(0, 2) === "rr") {
+                return "<span class='second'>eiy</span>"
+            } else {
+                return "<span class='second'>ei</span>"
+            }
+        } else if ($('#mood-negative').hasClass('active')) {
+            // Horen 2.3.5.2
+            if (afterSecond.charAt(0) === "i") {
+                return "<span class='second'>äng/eng</span>"
+            } else {
+                return "<span class='second'>äng</span>"
+            }
+        } else if ($('#mood-formal').hasClass('active')) {
+            return "<span class='second'>uy</span>"
+        } else if ($('#mood-inferential').hasClass('active')) {
+            return "<span class='second'>ats</span>"
+        } else {
+            return ""
+        }
+    }
+    
+    function buildResult(beforeFirst, prefirst, first, between, second, afterSecond) {
+        var word = beforeFirst +
+                    (prefirst ? "-" : "") +
+                    prefirst +
+                    (prefirst ? "-" : "") +
+                    (first ? "-" : "") +
+                    first +
+                    (first ? "-" : "") +
+                    between +
+                    (second ? "-" : "") +
+                    second +
+                    (second ? "-" : "") +
+                    afterSecond
+        
+        // replace sequences of ----- by -
+        // and remove -'s on the end and begin
+        word = word.replace(/-+/g, "-").replace(/^-/, "").replace(/-$/, "")
+        
+        return word
+    }
+    
+    function prefixedAdjective(adjective) {
+        if (adjective.charAt(0) === "a") { // TODO should this also be done with aw- and ay-?
+            return "<span class='no-highlight'>" + adjective + "</span>"
+        } if (adjective.substring(0, 2) === "le") {
+            return "<span class='prefix'>(a)</span>-" + "<span class='no-highlight'>" + adjective + "</span>"
+        } else {
+            return "<span class='prefix'>a</span>-" + "<span class='no-highlight'>" + adjective + "</span>"
+        }
+    }
+    
+    function suffixedAdjective(adjective) {
+        if (adjective.charAt(adjective.length - 1) === "a") {
+            return "<span class='no-highlight'>" + adjective + "</span>"
+        } else {
+            return "<span class='no-highlight'>" + adjective + "</span>-<span class='suffix'>a</span>"
+        }
+    }
+</script>

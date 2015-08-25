@@ -1,0 +1,100 @@
+---
+id: navi-adjectives
+title: Na'vi adjectives
+short_title: Adjectives
+layout: default
+short_header: yes
+navbar: navi
+---
+
+<style>
+    .prefix {
+        color: #dd2255;
+        font-weight: bold;
+    }
+    .suffix {
+        color: #2255dd;
+        font-weight: bold;
+    }
+    .result {
+        font-size: 200%;
+        line-height: 200%;
+    }
+</style>
+
+<p>Na'vi adjectives take an "<b>a</b>" prefix or suffix when they are preceded or followed by the noun they belong to. This small tool shows this for any adjective.</p>
+<form>
+    <center>
+        <input id="adjective-input" type="text" class="form-control" style="width: 300px;" placeholder="Enter an adjective here..."></input>
+    </center>
+</form>
+<br>
+<center id="result-section" style="display: none;">
+    <span class="result"><span class="muted">&lt;noun&gt;</span>&nbsp;&nbsp;<span id="prefix-result">...</span></span><br>
+    or<br>
+    <span class="result"><span id="suffix-result">...</span>&nbsp;&nbsp;<span class="muted">&lt;noun&gt;</span></span>
+</center>
+
+<script>
+    var typingTimeout
+    var previousAdjective
+    $(document).ready(function() {
+        $('#adjective-input').keyup(function() {
+            
+            if ($('#adjective-input').val() === previousAdjective) {
+                return
+            }
+            $('#result-section').fadeOut()
+            previousAdjective = $('#adjective-input').val()
+            
+            var el = this
+            
+            if (typingTimeout) {
+                clearTimeout(typingTimeout)
+            }
+            typingTimeout = setTimeout(function() {
+                doneTyping.call(el)
+            }, 500)
+        });
+        doneTyping()
+    });
+    
+    function doneTyping() {
+        var adjective = $('#adjective-input').val()
+        
+        if (!adjective) {
+            $('#result-section').fadeOut()
+            return
+        }
+        updateFields()
+    }
+    
+    function updateFields() {
+        
+        var adjective = $('#adjective-input').val()
+        
+        $('#prefix-result').html(prefixed(adjective))
+        $('#suffix-result').html(suffixed(adjective))
+        
+        // fade in the result
+        $('#result-section').fadeIn()
+    }
+    
+    function prefixed(adjective) {
+        if (adjective.charAt(0) === "a") { // TODO should this also be done with aw- and ay-?
+            return adjective
+        } if (adjective.substring(0, 2) === "le") {
+            return "<span class='prefix'>(a)</span>-" + adjective
+        } else {
+            return "<span class='prefix'>a</span>-" + adjective
+        }
+    }
+    
+    function suffixed(adjective) {
+        if (adjective.charAt(adjective.length - 1) === "a") {
+            return adjective
+        } else {
+            return adjective + "-<span class='suffix'>a</span>"
+        }
+    }
+</script>

@@ -1,0 +1,164 @@
+---
+id: navi-nouns
+title: Zelfstandige naamwoorden in het Na'vi
+short_title: ZN's
+layout: default
+short_header: yes
+navbar: navi
+---
+
+<style>
+    .prefix {
+        color: #dd2255;
+        font-weight: bold;
+    }
+    .lenition {
+        color: #229955;
+        font-weight: bold;
+    }
+    .suffix {
+        color: #2255dd;
+        font-weight: bold;
+    }
+</style>
+
+<p>Dit is een hulpmiddel waarmee je de verbuiging van zelfstandige naamwoorden in het Na'vi kunt zien. Typ hieronder de basisvorm van het woord in, en de verbuiging verschijnt eronder. (Dit werkt alleen voor zelfstandige naamwoorden, niet voor persoonlijke voornaamwoorden en dergelijke.)</p>
+<form>
+    <center>
+        <input id="noun-input" type="text" class="form-control" style="width: 300px;" placeholder="Typ een zelfstandig naamwoord in..."></input>
+    </center>
+</form>
+<br>
+<center>
+    <table id="declension-table" class="table table-striped table-hover" style="width: auto; display: none;">
+        <tr>
+            <td></td>
+            <td style="text-align: center;"><i>enkelvoud</i></td>
+            <td style="text-align: center;"><i>tweevoud</i></td>
+            <td style="text-align: center;"><i>drievoud</i></td>
+            <td style="text-align: center;"><i>meervoud <span class="muted">(&gt;&#8202;3)</span></i></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><i>subjectief</i></td>
+            <td id="subjective-field">...</td>
+            <td id="subjective-dual-field">...</td>
+            <td id="subjective-trial-field">...</td>
+            <td id="subjective-plural-field">...</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><i>agentief</i></td>
+            <td id="agentive-field">...</td>
+            <td id="agentive-dual-field">...</td>
+            <td id="agentive-trial-field">...</td>
+            <td id="agentive-plural-field">...</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><i>patiëntief</i></td>
+            <td id="patientive-field">...</td>
+            <td id="patientive-dual-field">...</td>
+            <td id="patientive-trial-field">...</td>
+            <td id="patientive-plural-field">...</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><i>datief</i></td>
+            <td id="dative-field">...</td>
+            <td id="dative-dual-field">...</td>
+            <td id="dative-trial-field">...</td>
+            <td id="dative-plural-field">...</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><i>genitief</i></td>
+            <td id="genitive-field">...</td>
+            <td id="genitive-dual-field">...</td>
+            <td id="genitive-trial-field">...</td>
+            <td id="genitive-plural-field">...</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;"><i>topical</i></td>
+            <td id="topical-field">...</td>
+            <td id="topical-dual-field">...</td>
+            <td id="topical-trial-field">...</td>
+            <td id="topical-plural-field">...</td>
+        </tr>
+    </table>
+</center>
+
+<script src="/static/js/navi/cases.js"></script>
+
+<script>
+    var typingTimeout
+    var previousNoun
+    $(document).ready(function() {
+        $('#noun-input').keyup(function() {
+            
+            if ($('#noun-input').val() === previousNoun) {
+                return
+            }
+            $('#declension-table').fadeOut()
+            previousNoun = $('#noun-input').val()
+            
+            var el = this
+            
+            if (typingTimeout) {
+                clearTimeout(typingTimeout)
+            }
+            typingTimeout = setTimeout(function() {
+                doneTyping.call(el)
+            }, 500)
+        });
+        doneTyping()
+    });
+    
+    function doneTyping() {
+        var noun = $('#noun-input').val()
+        
+        if (!noun) {
+            $('#declension-table').fadeOut()
+            return
+        }
+        updateFields()
+    }
+    
+    function updateFields() {
+        
+        var noun = $('#noun-input').val()
+        
+        // singular
+        $('#subjective-field').html(subjective(noun))
+        $('#agentive-field').html(agentive(noun))
+        $('#patientive-field').html(patientive(noun))
+        $('#dative-field').html(dative(noun))
+        $('#genitive-field').html(genitive(noun))
+        $('#topical-field').html(topical(noun))
+        
+        // dual
+        var dualNoun = dual(noun)
+        $('#subjective-dual-field').html(subjective(dualNoun))
+        $('#agentive-dual-field').html(agentive(dualNoun))
+        $('#patientive-dual-field').html(patientive(dualNoun))
+        $('#dative-dual-field').html(dative(dualNoun))
+        $('#genitive-dual-field').html(genitive(dualNoun))
+        $('#topical-dual-field').html(topical(dualNoun))
+        
+        // trial
+        var trialNoun = trial(noun)
+        $('#subjective-trial-field').html(subjective(trialNoun))
+        $('#agentive-trial-field').html(agentive(trialNoun))
+        $('#patientive-trial-field').html(patientive(trialNoun))
+        $('#dative-trial-field').html(dative(trialNoun))
+        $('#genitive-trial-field').html(genitive(trialNoun))
+        $('#topical-trial-field').html(topical(trialNoun))
+        
+        // plural
+        var pluralNoun = plural(noun)
+        $('#subjective-plural-field').html(subjective(pluralNoun))
+        $('#agentive-plural-field').html(agentive(pluralNoun))
+        $('#patientive-plural-field').html(patientive(pluralNoun))
+        $('#dative-plural-field').html(dative(pluralNoun))
+        $('#genitive-plural-field').html(genitive(pluralNoun))
+        $('#topical-plural-field').html(topical(pluralNoun))
+        
+        // fade in the table
+        $('#declension-table').fadeIn()
+    }
+</script>

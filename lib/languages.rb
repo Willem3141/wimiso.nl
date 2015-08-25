@@ -123,6 +123,16 @@ LAYOUT_TRANSLATIONS = {
            'nl' => 'Tag',
            'en' => 'Tag',
            'x-navi' => 'Txele alu'
+          },
+  :back => {
+           'nl' => 'Terug',
+           'en' => 'Back',
+           'x-navi' => 'Tätxaw'
+          },
+  :grammar_tools => {
+           'nl' => 'Grammatica',
+           'en' => 'Grammar tools',
+           'x-navi' => 'Horen lì\'fyayä'
           }
 }
 
