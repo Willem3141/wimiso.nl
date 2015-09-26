@@ -53,7 +53,7 @@
     
     <div class="outer-div">
       
-      <% if @item[:short_header] %>
+      <% if @item[:short_header] or @item[:index_page] %>
         <div id="navbar-strut"></div>
       <% else %>
         <header id="header">
@@ -66,12 +66,15 @@
       <% else %>
         <%= render "/navbars/main.html" %>
       <% end %>
-    
-      <div id="title">
-        <div id="title-inner">
-          <h1><%= @item[:title] %></h1>
+      
+      <% if not @item[:index_page] %>
+        <div id="title">
+          <div id="title-inner">
+            <h1><%= @item[:title] %></h1>
+          </div>
         </div>
-      </div>
+      <% end %>
+      
       <div id="content">
         <div id="content-inner">
           <%= yield %>
