@@ -1,12 +1,21 @@
 ---
 id: joxy
 title: Joxy
+layout: default
 ---
 
-<p>If you ever used Java programs in KDE (a desktop environment for &ndash; mostly &ndash; Linux), then you probably noticed that the layout of such programs is not at all similar to KDE's layout. The default style of KDE programs is Oxygen, while the default style of Java programs is called Metal and looks completely different. Fortunately it is possible to do something about that, since Java supports creating your own themes (in Java terminology: <i>look-and-feels</i>).</p>
+<div class="row">
+  <div class="col-xs-12 col-md-9">
+    <p>If you ever used Java programs in KDE (a desktop environment for &ndash; mostly &ndash; Linux), then you probably noticed that the layout of such programs is not at all similar to KDE's layout. The default style of KDE programs is Oxygen, while the default style of Java programs is called Metal and looks completely different. Fortunately it is possible to do something about that, since Java supports creating your own themes (in Java terminology: <i>look-and-feels</i>).</p>
 
-<p>Joxy is a look-and-feel that Thom Castermans and I created. Joxy tries to imitate KDE's Oxygen style as closely as possible, meaning that Java programs look much better in KDE.</p>
+    <p>Joxy is a look-and-feel that Thom Castermans and I created. Joxy tries to imitate KDE's Oxygen style as closely as possible, meaning that Java programs look much better in KDE.</p>
+    
+    <%= render "/image.html", :url => "/static/img/joxy.png", :description => "Netbeans using the Joxy look-and-feel" %>
 
-<p>Click <a href="http://joxy.denvelop.nl">here</a> to visit Joxy's site.</p>
-
-<div class="alert alert-info"><b>Note:</b> If you use KDE 5, it will use the Breeze style instead of Oxygen. Joxy unfortunately does not (yet) support Breeze.</div>
+    <p>Click <a href="http://joxy.denvelop.nl">here</a> to visit Joxy's site.</p>
+  </div>
+  <div class="col-xs-12 col-md-3 sidebox">
+    <h3>What about the Breeze theme?</h3>
+    <p>Starting with KDE 5, by default the Breeze style is used instead of Oxygen. It is hard to make a Breeze look-and-feel for Swing, since Swing doesn't support SVG images at all and they are widely used throughout Breeze. Hence, this project is stalled at the moment until we find a solution to this.</p>
+  </div>
+</div>
