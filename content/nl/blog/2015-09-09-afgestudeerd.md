@@ -5,12 +5,13 @@ kind: article
 created_at: 2015-09-09 16:38
 tags:
  - study
-draft: true
 ---
 
 Vorige week had ik de diploma-uitreiking van mijn master! Ik ben nu dus officieel afgestudeerd in Computer Science & Engineering aan de [TU/e](http://tue.nl).
 
-<%= render "/image.html", :url => "/static/img/2015-09-09.jpg", :description => "..." %>
+<!-- more -->
+
+<%= render "/image.html", :url => "/static/img/2015-09-09.jpg", :description => "Hoera!" %>
 
 En nu?
 ------
