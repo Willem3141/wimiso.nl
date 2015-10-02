@@ -3,10 +3,18 @@ id: joxy
 title: Joxy
 ---
 
-<p>Gebruik je Java-programma's onder KDE (een bureaubladomgeving voor &ndash; voornamelijk &ndash; Linux), dan heb je vast gemerkt dat het uiterlijk van die programma's niet overeenkomt met dat van KDE. KDE's standaard-stijl is Oxygen, terwijl de standaard-stijl van Java-programma's Metal heet en er compleet anders uitziet. Gelukkig is daar wel iets aan te doen, want Java ondersteunt zelfgemaakte thema's (in Java-terminologie <i>look-and-feels</i>).</p>
+<div class="row">
+  <div class="col-xs-12 col-md-9">
+    <p>Gebruik je Java-programma's onder KDE (een bureaubladomgeving voor &ndash; voornamelijk &ndash; Linux), dan heb je vast gemerkt dat het uiterlijk van die programma's niet overeenkomt met dat van KDE. KDE's standaard-stijl is Oxygen, terwijl de standaard-stijl van Java-programma's Metal heet en er compleet anders uitziet. Gelukkig is daar wel iets aan te doen, want Java ondersteunt zelfgemaakte thema's (in Java-terminologie <i>look-and-feels</i>).</p>
 
-<p>Joxy is een look-and-feel die Thom Castermans en ik hebben gemaakt. Joxy probeert zo goed mogelijk om KDE's Oxygen-thema na te doen, zodat Java-programma's beter integreren in KDE.</p>
+    <p>Joxy is een look-and-feel die Thom Castermans en ik hebben gemaakt. Joxy probeert zo goed mogelijk om KDE's Oxygen-thema na te doen, zodat Java-programma's beter integreren in KDE.</p>
+        
+    <%= render "/image.html", :url => "/static/img/joxy.png", :description => "Netbeans met de Joxy-look-and-feel" %>
 
-<p>Klik <a href="http://joxy.denvelop.nl">hier</a> om naar de site van Joxy te gaan.</p>
-
-<div class="alert alert-info"><b>Opmerking:</b> Als je KDE 5 gebruikt, dan gebruikt KDE de Breeze-stijl in plaats van Oxygen. Joxy ondersteunt Breeze helaas (nog) niet.</div>
+    <p>Klik <a href="http://joxy.denvelop.nl">hier</a> om naar de site van Joxy te gaan.</p>
+  </div>
+  <div class="col-xs-12 col-md-3 sidebox">
+    <h3>Werkt dit met het Breeze-thema?</h3>
+    <p>Vanaf KDE 5 gebruikt KDE standaard de Breeze-stijl in plaats van Oxygen. Het is moeilijk om een goede Breeze-look-and-feel voor Swing te maken, want Swing ondersteunt geen SVG-plaatjes, en die worden in Breeze overal gebruikt. Daarom staat dit project op het moment stil, totdat we hiervoor een oplossing hebben gevonden.</p>
+  </div>
+</div>

@@ -1,1 +1,35 @@
 @import "layout.less";
+
+@color-text: rgba(255, 255, 255, 0.95);
+
+body {
+    background-image: url("/static/img/leaves.jpg");
+    background-size: cover;
+}
+
+#header, #header-inner,
+#content, #content-inner,
+#content-background,
+#title, #title-inner,
+#footer, #footer-inner {
+    background: transparent;
+}
+
+#content-background-inner {
+    background-color: rgba(255, 255, 255, @darken-amount);
+}
+
+.index-page-header {
+    font-family: "Wimiso", sans-serif;
+    font-size: 50pt;
+    text-align: center;
+    color: @color-text;
+}
+
+#footer {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+a {
+    color: white;
+}
