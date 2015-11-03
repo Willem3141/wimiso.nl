@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="<%= @item[:language] %>">
+  <head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#5774A9">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Wimiso - <%= @item[:title] %></title>
+    
+    <!-- jQuery -->
+    <script src="/static/js/jquery-2.1.1.min.js"></script>
+    
+    <!-- Bootstrap -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    
+    <!-- onze eigen zooi -->
+    <% if item[:index_page] %>
+        <link href="/static/css/homepage.css" rel="stylesheet">
+    <% else %>
+        <link href="/static/css/layout.css" rel="stylesheet">
+    <% end %>
+    
+    <script src="/static/js/header.js"></script>
+    
+    <% if item[:needs_math] %>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config(
+                {
+                    tex2jax: {inlineMath: [['$','$']]},
+                    "HTML-CSS": {
+                        availableFonts: [], preferredFont: null, // force Web fonts
+                        webFont: "Neo-Euler"
+                    }
+                }
+            );
+        </script>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+    <% end %>
+    
+    <% if @item[:needs_highlighting] %>
+        <link href="/static/css/pygments.css" rel="stylesheet">
+    <% end %>
+    
+    <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
+  </head>
+  <body data-spy="scroll" data-target="#toc">
+    
+    <div id="content-background">
+      <div id="content-background-inner">
+      </div>
+    </div>
+    
+    <div class="outer-div">
+      
+      <div id="navbar-strut"></div>
+      
+      <% if @item[:navbar] %>
+        <%= render "/navbars/" + @item[:navbar] + ".html" %>
+      <% else %>
+        <%= render "/navbars/main.html" %>
+      <% end %>
+      
+      <% if not @item[:index_page] %>
+        <div id="title">
+          <div id="title-inner">
+            <h1><span class="glyphicon <%= @item[:icon] %>" aria-hidden="true"></span> <%= @item[:title] %></h1>
+          </div>
+        </div>
+      <% end %>
+      
+      <div id="content">
+        <div id="content-inner">
+          <%= yield %>
+        </div>
+      </div>
+      
+      <div id="footer">
+        <div id="footer-inner" class="container">
+          &copy; 2014 &ndash; <%= Date.today.year %>&nbsp;&nbsp;Willem Sonke. <%= _ :footer_text %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
