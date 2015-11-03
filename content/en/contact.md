@@ -20,7 +20,7 @@ You can also find me on XMPP; my XMPP account is **willem *(at)* jabber *(dot)* 
 Tox
 ---
 
-[Tox](http://tox.im) is a new protocol for encrypted chats. It is still in alpha, but you can find me using this (ridiculously long 😉) Tox ID:
+[Tox](http://tox.chat) is a new protocol for encrypted chats. It is still in alpha, but you can find me using this (ridiculously long 😉) Tox ID:
 
 <center><code>AC9341F62DF2DD3E314040398393657436A68008A6556D3355858F3BB85CE30E462DC0E8F0D6</code></center>
 

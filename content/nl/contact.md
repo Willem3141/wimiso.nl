@@ -20,7 +20,7 @@ Je kunt me ook vinden op XMPP; mijn XMPP-account is **willem *(apenstaartje)* ja
 Tox
 ---
 
-[Tox](http://tox.im) is een nieuw protocol voor versleuteld chatten. Het is nog in alfa-status, maar je kunt me vinden via deze (belachelijk lange 😉) Tox-ID:
+[Tox](http://tox.chat) is een nieuw protocol voor versleuteld chatten. Het is nog in alfa-status, maar je kunt me vinden via deze (belachelijk lange 😉) Tox-ID:
 
 <center><code>AC9341F62DF2DD3E314040398393657436A68008A6556D3355858F3BB85CE30E462DC0E8F0D6</code></center>
 
