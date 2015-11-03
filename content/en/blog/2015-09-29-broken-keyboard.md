@@ -5,6 +5,7 @@ kind: article
 created_at: 2015-09-29 11:31
 tags:
  - random
+draft: true
 ---
 
 ... or, how I wasted an entire morning trying to get back into my computer.
