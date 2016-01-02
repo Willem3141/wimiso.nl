@@ -1,0 +1,12 @@
+.translated:hover {
+    color: #6D96C8;
+}
+
+.tooltip-inner {
+    background-color: #6D96C8;
+    font-weight: 700;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #6D96C8;
+}

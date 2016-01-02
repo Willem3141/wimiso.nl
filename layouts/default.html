@@ -37,9 +37,12 @@
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
     <% end %>
-    
-    <% if @item[:needs_highlighting] %>
+    <% if item[:needs_highlighting] %>
         <link href="/static/css/pygments.css" rel="stylesheet">
+    <% end %>
+    <% if item[:needs_popups] %>
+        <link href="/static/css/popups.css" rel="stylesheet">
+        <script type="text/javascript" src="/static/js/popups.js"></script>
     <% end %>
     
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">

@@ -56,6 +56,9 @@ end
 
 compile '/*/blog/**/*' do
   if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
+    if (item[:needs_popups]) then
+      filter :popups
+    end
     filter :erb
     if item[:extension] == 'md'
       filter :kramdown, :auto_ids => true
@@ -73,6 +76,9 @@ end
 
 compile '/**/*' do
   if (item.identifier.to_s.end_with? ".html") || (item.identifier.to_s.end_with? ".md")
+    if (item[:needs_popups]) then
+      filter :popups
+    end
     filter :erb
     if item[:extension] == 'md'
       filter :kramdown, :auto_ids => true
@@ -99,6 +105,10 @@ end
 
 route '/static/css/homepage.less' do
     '/static/css/homepage.css'
+end
+
+route '/static/css/popups.css' do
+    '/static/css/popups.css'
 end
 
 route '/static/css/**/*' do

@@ -11,10 +11,15 @@ def sorted_articles_in_language_tag(lang, tag)
 end
 
 def get_post_start(post)
-  content = post.compiled_content
-  if content =~ /\s<!-- more -->\s/
-    content = content.partition('<!-- more -->').first +
-    "<div class='read-more'><a href='#{post.path}'>#{_(:read_more)} &rsaquo;</a></div>"
+  if post[:summary] then
+    post[:summary] +
+      "<div class='read-more'><a href='#{post.path}'>#{_(:read_more)} &rsaquo;</a></div>"
+  else
+    content = post.compiled_content
+    if content =~ /\s<!-- more -->\s/
+      content = content.partition('<!-- more -->').first +
+      "<div class='read-more'><a href='#{post.path}'>#{_(:read_more)} &rsaquo;</a></div>"
+    end
+    content
   end
-  content
 end
