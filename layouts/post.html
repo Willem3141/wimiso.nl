@@ -4,7 +4,6 @@
     <%= yield %>
   </article>
   <h2><%= _(:comments) %></h2>
-  <!--<script data-isso="//isso.wimiso.nl/" data-isso-lang="<%= @item[:language] %>" src="//isso.wimiso.nl/js/embed.min.js"></script>
-  <section id="isso-thread"></section>-->
-  <p><i>Currently there is a problem with the comment system on my blog, so I had to switch it off. Please check back later...</i></p>
+  <script data-isso="//isso.wimiso.nl/" data-isso-lang="<%= @item[:language] %>" src="//isso.wimiso.nl/js/embed.min.js"></script>
+  <section id="isso-thread"></section>
 <% end %>

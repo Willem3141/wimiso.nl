@@ -1,0 +1,11 @@
+<div class="image-container">
+  <div class="image">
+    <audio controls>
+      <source src="<%= @url %>.mp3" type='audio/mpeg; codecs="mp3"'>
+      <source src="<%= @url %>.ogg" type='audio/ogg; codecs="vorbis"'>
+      <p>Sorry, your browser seems to be incompatible with the way this site displays audio. <a href="<%= @url %>.mp3">Click here</a> to download the audio fragment so you can listen to it anyway.</p>
+    </video>
+    <br>
+    <div class="image-description"><%= @description %></div>
+  </div>
+</div>
