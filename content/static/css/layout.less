@@ -5,14 +5,17 @@
 @import "header.less";
 @import "subheader.less";
 @import "blog.less";
+@import "pygments.less";
 
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:700,400,400italic,300');
+@import url('https://fonts.googleapis.com/css?family=Enriqueta:400,700|Julius+Sans+One&subset=latin,latin-ext');
 @font-face {
   font-family: 'Wimiso';
   src: url('/static/files/fonts/Wimiso.ttf') format('truetype'), url('/static/files/fonts/Wimiso.woff') format('woff');
 }
 
-@font-family-sans-serif: "Open Sans", sans-serif;
+@font-family-serif: "Enriqueta", serif;
+@font-family-base: @font-family-serif;
 @font-family-monospace: "Oxygen Mono", monospace;
 
 @color-primary: #b54772;
@@ -55,19 +58,23 @@ body {
 
 h1 {
     color: #444;
+	font-family: 'Julius Sans One';
     font-weight: 700;
     margin: 0;
+	margin-bottom: -4px;
     color: white;
-    font-size: 32pt;
-    text-align: left;
+    font-size: 36pt;
+    text-align: center;
 }
 
 h2 {
-    font-weight: 300;
+	font-family: 'Julius Sans One';
     font-size: 32pt;
     color: @color-primary;
     margin: 40px 0px 20px -1px;
-    text-align: left;
+	padding-bottom: 3px;
+    text-align: center;
+	border-bottom: 1px solid @color-primary;
 }
 
 h3 {
