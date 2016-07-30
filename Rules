@@ -131,7 +131,7 @@ end
 
 route '/**/index.*' do
   # /index.md gets written to /index.html
-  strip_default_language item.identifier.with_ext('html')
+  strip_default_language item.identifier.without_ext + '.html'
 end
 
 route '/**/*' do
